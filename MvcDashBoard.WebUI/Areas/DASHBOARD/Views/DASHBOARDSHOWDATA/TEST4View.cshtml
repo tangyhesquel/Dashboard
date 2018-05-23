@@ -1,0 +1,362 @@
+﻿@*@*@*@using System.Web.Helpers;
+@model MvcDashBoard.Model.DASHBOARD.Models.DASHBOARD_SHOW_DATA
+
+@{
+    ViewBag.Title = "DASHBOARD MAIN UI";
+    Layout = null;
+}
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DASHBOARDSHOWView</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*Esquel Common Lib*@
+    <link href="~/Scripts/Kendo/ButtonStyle.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/kendo.esquel.mobile.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/esquel.default.style.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/kendo.common-esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/kendo.esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/Keno.esquel.adjust.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Scripts/common/DASHBOARDSHOW.css" rel="stylesheet" />
+    <link href="~/Scripts/common/COMMON.css" rel="stylesheet" />
+    <script src="~/Scripts/common/COMMON.js"></script>
+    <script src="~/Scripts/common/DASHBOARDSHOW.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/bootstrap.js"></script>
+    <script src="~/Scripts/KendoUI/js/jquery.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/jszip.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.web.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.all.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/bootstrap.min.js"></script>
+</head>
+
+<body class="km-widget" style="touch-action: none;" data-spy="scroll" data-target="#myScrollspy">
+    @*<div class="jumbotron" style="height:3%">
+           <h3 style="text-align:center">DASHBOARD SYSTEM</h3>
+        </div>*@
+    @*<div id="dialog" hidden="hidden">
+
+        </div>*@
+
+    <div class="row">
+        <div class="col-xs-2" id="myScrollspy">
+            @*<ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="25">*@
+            <ul class="nav nav-pills">
+                @*<li id="LI_MainUI"><a href="#section-1">版面数据展示</a></li>*@
+                @*<li id="LI_MainUI"><a href="javascript:void(0);" onclick="Go_DashBoardShow();">版面数据展示</a></li>*@
+                @*<li id="LI_UpdateHeadCount"><a href="javascript:void(0);" onclick="Go_HeadCount();">员工信息变更</a></li>
+                    <li id="LI_BasicInformation"><a href="javascript:void(0);" onclick="Go_BasicInformation();">基本信息设置</a></li>*@
+                @*<li id="LI_MainUI"><a href="javascript:window.location.href=''+Go_DashBoardShow();">版面数据展示</a></li>*@
+                @*<li id="LI_UpdateHeadCount" onclick="Go_HeadCount()">人头信息变更</li>
+                    <li id="LI_BasicInformation" onclick="Go_BasicInformation()">基本信息设置</li>*@
+
+                @*<li id="LI_MainUI"><a href="javascript:void(0);" onclick="location.reload();">版面数据展示</a></li>
+                    <li id="LI_UpdateHeadCount"><a href="javascript:window.location.href=''+Go_HeadCount();">人头信息变更</a></li>
+                    <li id="LI_BasicInformation"><a href="javascript:window.location.href=''+Go_BasicInformation();" >基本信息设置</a></li>*@
+
+                <li id="LI_MainUI">@Html.ActionLink(@ViewData["MENU_MAIN"].ToString(), "DASHBOARDSHOWView", "DASHBOARDSHOWDATA", new { }, new { target = "_self" })</li> @*"版面数据"*@
+
+                <li id="LI_UpdateHeadCount">@Html.ActionLink(@ViewData["MENU_SHIFT"].ToString(), "EMPLOYEEATTENDTIMEView", "EMPLOYEEATTENDTIME", new { FACTORY_CD = Model.RUNNING_BASIC_INFORMATION.FACTORY_CD, LINE_CODE = Model.RUNNING_BASIC_INFORMATION.LINE_CODE, SHIFT_CODE = Model.RUNNING_BASIC_INFORMATION.SHIFT_CODE, TRX_DATE = Model.RUNNING_BASIC_INFORMATION.TRX_DATE, LANGUAGE = Model.RUNNING_BASIC_INFORMATION.LANGUAGE }, new { target = "EMPLOYEEATTENDTIMEView" })</li>@*班次修改*@
+
+                <li id="LI_BasicInformation">@Html.ActionLink(@ViewData["MENU_SETTING"].ToString(), "BASICINFORMATIONView", "BASICINFORMATIONDATA", new { }, new { target = "BASICINFORMATIONView" })</li>@*"基本设置"*@
+
+                @*<li id="LI_MainUI1">@Html.ActionLink("刷新数据", "DASHBOARDSHOWView", "DASHBOARDSHOWDATA", new { FACTORY_CD = Model.RUNNING_BASIC_INFORMATION.FACTORY_CD, LINE_CODE = Model.RUNNING_BASIC_INFORMATION.LINE_CODE, SHIFT_CODE = Model.RUNNING_BASIC_INFORMATION.SHIFT_CODE, TRX_DATE = Model.RUNNING_BASIC_INFORMATION.TRX_DATE,REFRESH = "Y" }, new { target = "_self" })</li>*@
+            </ul>
+            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="25">
+                @*<li id="LI_GETHRData"><a href="javascript:window.location.href=' '+Go_GETHRData();">获取考勤</a></li>*@
+                <li></li>
+                <li></li>
+                <li id="LI_GETHRData"><a href="javascript:void(0);" onclick="Go_GETHRData();">@ViewData["MENU_GETHRDATA"]</a></li> @*获取考勤*@
+                <li></li>
+                <li id="LI_BasicInformation1"><a href="javascript:void(0);" onclick="Go_DashBoardShow();">@ViewData["MENU_SETTING"]</a></li> @*设置*@
+                <li></li>
+                <li id="LI_HELPPAGE"><a href='~/HelpFile.html' target='_blank'>@ViewData["MENU_HELPPAGE"]</a></li>
+            </ul>
+        </div>
+        <span id="notification" style="display:none;"></span>
+        <script id="errorTemplate" type="text/x-kendo-template">
+            <div class="wrong-pass">
+                <h3>#= title #</h3>
+                <p>#= message #</p>
+            </div>
+        </script>
+        <script id="successTemplate" type="text/x-kendo-template">
+            <div class="upload-success">
+                <h3>#= message #</h3>
+            </div>
+        </script>
+
+        <div class="col-xs-10">
+            <h3 id="section-1"></h3>
+            <div id="div_left">
+                <table class="tb_1" border="1">
+                    <tr style="width:100%">
+                        <td class="td0" width="50%" style="text-align:center">
+                            <label class='L1' id="LBL_LINE">@ViewData["LBL_LINE"]</label> @*Line/组别:*@
+                            <label class='L2' id="LBL_LINE_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.line)</label>
+                            <p></p>
+                            <label class='L1' id="LBL_HEADCOUNT">@ViewData["LBL_HeadCount"]</label>
+                            <label class='L2' id="LBL_HEADCOUNT_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.HeadCount)</label>
+                        </td>
+                        <td class="td0" width="50%" style="text-align:center">
+                            <label class='L1' id="LBL_DATE">@ViewData["LBL_DATE"]</label>@*Date/日期:*@
+                            <p></p>
+                            <label class='L2' id="LBL_NowTime"></label>
+
+                        </td>
+                    </tr>
+
+                    <tr style="width:100%">
+                        <td class="td0" width="50%" style="text-align:center">
+                            <label class='L1' id="LBL_GONO">@ViewData["LBL_GONO"]</label>@*GO#:*@
+                            <label class='L2' id="LBL_GONO_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.GONO)</label>
+                        </td>
+                        <td class="td0" width="50%" style="text-align:center">
+                            <label class='L1' id="LBL_SAH">@ViewData["LBL_SAH"]</label>@*SAH:*@
+                            <label class='L2' id="LBL_SAH_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.SAH)</label>:
+                        </td>
+                    </tr>
+
+                    <tr style="width:100%">
+                        <td class="td0" width="50%" style="text-align:center">
+                            <label class='L1' id="LBL_OUTPUT_TARGET_E">@ViewData["LBL_OUTPUT_TARGET_E"]</label> @*Acc.OutPut/Acc.Target*@
+                            <p></p>
+                            <label class='L1' id="LBL_OUTPUT_TARGET_C">@ViewData["LBL_OUTPUT_TARGET_C"]</label>@*实际产量/目标产量*@
+                            <p></p>
+                            <label class='L5' id="LBL_ACTUAL_TARGET_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.ACTUAL_QTY)/@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Target_QTY)</label>
+                        </td>
+                        <td class="td0" width="50%" style="text-align:center">
+                            <label class='L1' id="LBL_PI_PASS_FAIL_E">@ViewData["LBL_PI_PASS_FAIL_E"]</label>@*PI PASS/PI FAIL*@
+                            <p></p>
+                            <label class='L1' id="LBL_PI_PASS_FAIL_C">@ViewData["LBL_PI_PASS_FAIL_C"]</label>@*正品\疵品:*@
+                            <p></p>
+                            <label class='L5' id="LBL_PI_PASS_FAIL_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.GOOD_GARMENT_QTY)/@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.WORKMANSHIP_DEFECT_QTY)</label>
+                        </td>
+                    </tr>
+
+                    <tr style="width:100%">
+                        <td class="td0" width="50%" style="text-align:center">
+                            <label class='L1' id="LBL_EFFICIENCY">@ViewData["LBL_EFFICIENCY"]</label>@*EFFICIENCY/效率*@
+                            <p></p>
+
+                            <label class='L5' id="LBL_EFFICIENCY_2"></label>
+                        </td>
+                        <td class="td0" width="50%" style="text-align:center">
+                            <label class='L1' id="LBL_FPY">@ViewData["LBL_FPY"]</label>@*FPY/通过率*@
+                            <p></p>
+                            <label class='L5' id="LBL_FPY_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Fpy).ToString()</label>
+                        </td>
+                    </tr>
+
+                    <tr style="width:100%">
+                        <td class="td0" colspan=2 width="100%" style="text-align:center">
+                            <label class='L3' id="LBL_LASTSHIFT">@ViewData["LBL_LASTSHIFT"]</label>@*LAST SHIFT DATA/上一班次数据*@
+                            <table class="tb_2" border="0" align="center">
+                                <tr>
+                                    <td id="TD_DATE">@ViewData["TD_DATE"]</td>@*Date:*@
+                                    <td id="id_l1" class="td_c1">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.trsdate)</td>
+                                    <td id="TD_FPY">@ViewData["TD_FPY"]</td>@*FPY:*@
+                                    <td id="id_l2" class="td_c1">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.Fpy)</td>
+                                    <td id="TD_OUTPUT">@ViewData["TD_OUTPUT"]</td>@*Output:*@
+                                    <td id="id_l3" class="td_c1">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.ACTUAL_QTY)</td>
+                                    <td id="TD_EFF">@ViewData["TD_EFF"]</td>@*Eff:*@
+                                    <td id="id_l4" class="td_c1">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.Eff)</td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            @*--右边表格*@
+
+            <div id="div_right">
+                <table class="tb_1" border="1" id="TB_2">
+                    <tr>
+                        <td class="td0" width="50%" style="text-align:center"><label id="LBL_TIME_PERIOD" class='L1'>@ViewData["LBL_TIME_PERIOD"]</label> </td>@*时段*@
+                        <td class="td0" width="50%" style="text-align:center"><label id="LBL_OUTPPUT" class='L1'>@ViewData["LBL_OUTPUT"]</label></td>@*OutPut 产量*@
+                    </tr>
+                    @{
+                        int i = 0;
+                        string LBL_TIME_;
+                        string LBL_QTY_;
+                        foreach (var item in Model.FN_DASHBOARD_TIME_INTERVAL_QTY_Result)
+                        {
+                            i = i + 1;
+                            LBL_TIME_ = "LBL_TIME_" + i.ToString().Trim();
+                            LBL_QTY_ = "LBL_QTY_" + i.ToString().Trim();
+
+                            <tr style="width:100%">
+                                <td class="td0" width="50%" style="text-align:center">
+                                    <label id=@LBL_TIME_ class='L2' name="time">@Html.DisplayFor(modelItem => item.TIME_PERIOD)</label>
+
+                                </td>
+                                <td class="td0" width="50%" style="text-align:center">
+                                    <label id=@LBL_QTY_ class='L2' name="outqty">@Html.DisplayFor(modelItem => item.ACTUAL_QTY)</label>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                    <tr id="TTR_TOTAL" style="width:100%;color:blue">
+                        <td class="td0" width="50%" style="text-align:center"><label id="LBL_TOTAL" class='L4'>@ViewData["LBL_TOTAL"]</label></td>@*Total汇总*@
+                        <td class="td0" width="50%" style="text-align:center"><label class='L4' id="LBL_Total_Qty"></label></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div id="loading"></div>
+    </div>
+
+</body>
+</html>
+
+<script>
+    var notificationInit;
+    NotificationInit();
+
+    var factorycd = "@Html.DisplayFor(model=> model.RUNNING_BASIC_INFORMATION.FACTORY_CD)";
+    var linecode = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.LINE_CODE)";
+    var shiftcode = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.SHIFT_CODE)";
+    var trxdate = getdate("@Html.DisplayFor(model=> model.RUNNING_BASIC_INFORMATION.TRX_DATE)", "S", "yyyy-MM-dd", 'N');
+    var only1line = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.Only1Line)";
+    var MSG_INQ_OK_T = "@ViewData["MSG_INQ_OK_T"]";
+    var MSG_INQ_OK = "@ViewData["MSG_INQ_OK"]"
+    var MSG_INQ_FAILED_T = "@ViewData["MSG_INQ_FAILED_T"]";
+    var MSG_INQ_FAILED = "@ViewData["MSG_INQ_FAILED"]";
+
+    var HR_MAX_TIME_DIFFERENCE = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.HR_MAX_TIME_DIFFERENCE)";
+    var HR_REFRESH_INTERVAL = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.HR_REFRESH_INTERVAL)";
+    var Eff = "@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Eff)";
+    var Fpy = "@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Fpy)";
+
+    var Eff_Pre=@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.Eff);
+    var Fpy_Pre=@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.Fpy);
+
+    $(function () {
+        NotificationInit();
+        //(document).off('click.bs.dropdown.data-api');
+        //dropdownOpen();//调用
+
+        var actual = "@Html.DisplayFor(model =>  model.FN_DASHBOARD_SHOW_DATA_Result.ACTUAL_QTY)";
+        var target = "@Html.DisplayFor(model =>  model.FN_DASHBOARD_SHOW_DATA_Result.Target_QTY)";
+        var refreshtime = "@Html.DisplayFor(model =>  model.RUNNING_BASIC_INFORMATION.REFRESH_INTERVAL)";
+
+        document.getElementById('LBL_EFFICIENCY_2').innerHTML = parseInt(Eff).toString() + "%";
+        document.getElementById('LBL_FPY_2').innerHTML = parseInt(Fpy).toString() + "%";
+
+        document.getElementById('id_l2').innerHTML = parseInt(Eff).toString() + "%";
+        document.getElementById('id_l4').innerHTML = parseInt(Fpy).toString() + "%";
+
+        DashBoardShow_DataProcess(actual, target, HR_REFRESH_INTERVAL);
+
+        setInterval("RefreshData('" + factorycd + "','" + linecode + "','" + shiftcode + "','" + trxdate + "','" + only1line + "')", refreshtime * 1000 * 60);
+        //var now = new Date(1@DateTime.Now.Year, 1@DateTime.Now.Month - 1, 1@DateTime.Now.Day, 1@DateTime.Now.Hour, 1@DateTime.Now.Minute, 1@DateTime.Now.Second, 1@DateTime.Now.Millisecond);
+        setInterval("getnow('#LBL_NowTime,')", 1000);
+
+    });
+
+
+
+    /**    * 鼠标划过就展开子菜单，免得需要点击才能展开    */
+    //function dropdownOpen() {
+    //    var $dropdownLi = $('li.dropdown');
+    //    $dropdownLi.mouseover(function () {
+    //        $(this).addClass('open');
+    //    }).mouseout(function () {
+    //        $(this).removeClass('open');
+    //    });
+    //}
+
+
+</script>*@
+
+
+
+
+
+
+
+
+<div data-role="esq_navbar1">
+
+    <table align="center" border="0" class="table1">
+        <tr style="height:30%">
+            <th colspan="4" align="center">
+                <span id="SPAN1" style="font-size:24px;color:blue">@ViewData["SPN_SPAN1"]</span> @*基本信息设置-Basic Information Entry*@
+                <p></p><p></p>
+            </th>
+        </tr>
+        <tr>
+            <td><label id="LBL_FACTORY_CD">@ViewData["LBL_FACTORY_CD"]</label></td> @*工厂-FACTORY CODE*@
+            <td><input style="width:auto" id="FACTORY_CD" /></td>
+            <td><label id="LBL_GARMENT_TYPE">@ViewData["LBL_GARMENT_TYPE"]</label></td> @*成衣类型-GARMENT TYPE*@
+            <td><input id="GARMENT_TYPE" /></td>
+        </tr>
+        <tr>
+            <td><label id="LBL_LINE_CODE1">@ViewData["LBL_LINE_CODE1"]</label></td>@*组别1-LINE 1*@
+            <td><input id="LINE_CODE1" /></td>
+            <td><label id="LBL_SHIFT_CODE1">@ViewData["LBL_SHIFT_CODE1"]</label></td>@*班次1-SHIFT 1*@
+            <td><input id="SHIFT_CODE1" /></td>
+        </tr>
+        <tr>
+            <td><label id="LBL_LINE_CODE2">@ViewData["LBL_LINE_CODE2"]</label></td>@*组别2-LINE2*@
+            <td><input id="LINE_CODE2" /></td>
+            <td><label id="LBL_SHIFT_CODE2">@ViewData["LBL_SHIFT_CODE2"]</label></td>@*班次2-SHIFT2*@
+            <td><input id="SHIFT_CODE2" /></td>
+        </tr>
+        <tr>
+            <td><label id="LBL_REFRESH_INTERVAL">@ViewData["LBL_REFRESH_INTERVAL"]</label></td>@*刷新时间-REFRESH TIME*@
+            <td><input id="REFRESH_INTERVAL" /></td>
+            <td><label id="LBL_LANGUAGE">@ViewData["LBL_LANGUAGE"]</label></td>@*版本*@
+            <td><input id="LANGUAGE" /></td>
+        </tr>
+        <tr>
+
+            <td><label id="LBL_HR_REFRESH_INTERVAL">@ViewData["LBL_HR_REFRESH_INTERVAL"]</label></td>@*刷新时间-REFRESH TIME*@
+            <td><input id="HR_REFRESH_INTERVAL" /></td>
+            <td><label id="LBL_HR_MAX_TIME_DIFFERENCE">@ViewData["LBL_HR_MAX_TIME_DIFFERENCE"]</label></td>@*版本*@
+            <td><input id="HR_MAX_TIME_DIFFERENCE" /></td>
+        </tr>
+        <tr><td colspan="4">         </td></tr>
+        <tr><td colspan="4">         </td></tr>
+        <tr onabort="1">
+            <td colspan="4"><p></p><span style="font-size:16px;color:blue"><label id="LBL_SPECIALSETTING">@ViewData["LBL_SPECIALSETTING"]</label></span><p></p></td>      @*特别设置-SPECIAL SETTING*@
+        </tr>
+        <tr onabort="1">
+            <td colspan="1"><label id="LBL_LINE_CODE3">@ViewData["LBL_LINE_CODE3"]</label></td>@*组别-LINE*@
+            <td colspan="1"><input id="LINE_CODE3" /></td>
+            @*<td colspan="2" align="center"><button id="returnbutton" onclick="ReturnToMain()" style="color:blue">返回</button></td>*@
+            @*<td colspan="2" align="center"><a href="javascript:window.location.href=''+Go_DashBoardShow();">返回</a></td>*@
+
+            @*<td colspan="2" align="center" style="font-size:24px" hidden="hidden">@Html.ActionLink("返回主页面-RETURN", "DASHBOARDSHOWView", "DASHBOARDSHOWDATA", new { }, new { target = "_self" })</td>*@
+
+            <td colspan="1"><label id="LBL_SHIFT_CODE3">@ViewData["LBL_SHIFT_CODE3"]</label></td>@*班次-SHIFT*@
+            <td colspan="1"><input id="SHIFT_CODE3" /></td>
+
+        </tr>
+        <tr onabort="1">
+            <td colspan="1"><label id="LBL_SHOWED_DATE3">@ViewData["LBL_SHOWED_DATE3"]</label></td>@*日期-DATE*@
+            <td colspan="1"><input id="SHOWED_DATE3" /></td>
+            <td></td>
+            <td></td>
+            @*<td colspan="2" align="center"><button id="closebutton" onclick="window.opener=null;window.close();" style="color:blue">@ViewData["BTN_CLOSE"]</button></td>*@
+            @*<td colspan="2" align="center"><button id="closebutton" onclick="winclose()" style="color:blue">@ViewData["BTN_CLOSE"]</button></td>*@
+        </tr>
+        <tr onabort="1">
+            <td colspan="3"></td>@*日期-DATE*@
+            <td colspan="2" align="center"><button id="savebutton" onclick="SaveDataToFile()" style="color:blue">@ViewData["BTN_SAVE"]</button></td>@*保存*@
+        </tr>
+
+    </table>
+</div>*@*@

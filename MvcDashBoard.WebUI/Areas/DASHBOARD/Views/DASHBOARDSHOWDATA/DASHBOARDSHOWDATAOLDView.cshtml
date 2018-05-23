@@ -1,0 +1,361 @@
+﻿@using System.Web.Helpers;
+@model MvcDashBoard.Model.DASHBOARD.Models.DASHBOARD_SHOW_DATA
+
+@{
+    ViewBag.Title = "DASHBOARD MAIN UI";
+    Layout = null;
+}
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DASHBOARDSHOWView</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*Esquel Common Lib*@
+    <link href="~/Scripts/Kendo/ButtonStyle.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/kendo.esquel.mobile.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/esquel.default.style.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/kendo.common-esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/kendo.esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Kendo/Kendo/Keno.esquel.adjust.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Scripts/common/DASHBOARDSHOW.css" rel="stylesheet" />
+    <link href="~/Scripts/common/COMMON.css" rel="stylesheet" />
+    <script src="~/Scripts/common/COMMON.js"></script>
+    <script src="~/Scripts/common/DASHBOARDSHOW.js"></script>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/bootstrap.js"></script>
+    <script src="~/Scripts/KendoUI/js/jquery.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/jszip.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.web.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.all.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        div {
+            padding-top: 0 !important;
+        }
+
+        NoUseDiv {
+            height: 3%;
+        }
+    </style>
+
+</head>
+
+<body class="km-widget" style="touch-action: none;" data-spy="scroll" data-target="#myScrollspy">
+    <div id="NoUseDiv">@ViewData["MSG_NoUseDiv"]</div>
+    <nav class="navbar navbar-default" role="navigation" style="font-size:14px" id="menu">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#example-navbar-collapse">
+                    <span class="sr-only">MENU</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" style="font-size:18px;color:black">MENU</a>
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li id="LI_MainUI">@Html.ActionLink(@ViewData["MENU_MAIN"].ToString(), "DASHBOARDSHOWView", "DASHBOARDSHOWDATA", new { }, new { target = "_self" })</li> @*"版面数据"*@
+
+                    <li id="LI_UpdateHeadCount">@Html.ActionLink(@ViewData["MENU_SHIFT"].ToString(), "EMPLOYEEATTENDTIMEView", "EMPLOYEEATTENDTIME", new { FACTORY_CD = Model.RUNNING_BASIC_INFORMATION.FACTORY_CD, LINE_CODE = Model.RUNNING_BASIC_INFORMATION.LINE_CODE, SHIFT_CODE = Model.RUNNING_BASIC_INFORMATION.SHIFT_CODE, TRX_DATE = Model.RUNNING_BASIC_INFORMATION.TRX_DATE, LANGUAGE = Model.RUNNING_BASIC_INFORMATION.LANGUAGE }, new { target = "EMPLOYEEATTENDTIMEView" })</li>@*班次修改*@
+
+                    <li id="LI_BasicInformation">@Html.ActionLink(@ViewData["MENU_SETTING"].ToString(), "BASICINFORMATIONView", "BASICINFORMATIONDATA", new { FACTORY_CD = ViewData["FACTORY_CD_Param"], LINE_CODE = ViewData["LINE_CODE_Param"] }, new { target = "BASICINFORMATIONView" })</li>@*"基本设置"*@
+
+                    <li id="LI_BasicInformation">@Html.ActionLink(@ViewData["MENU_LINESHIFTSETTING"].ToString(), "DASHBOARDLINESHIFTSETTINGView", "DASHBOARDLINESHIFTSETTING", new { FACTORY_CD = Model.RUNNING_BASIC_INFORMATION.FACTORY_CD, SHIFT_CODE = Model.RUNNING_BASIC_INFORMATION.SHIFT_CODE, LANGUAGE = Model.RUNNING_BASIC_INFORMATION.LANGUAGE }, new { target = "DASHBOARDLINESHIFTSETTINGView" })</li>@*"班次设置"*@
+
+                    <li></li>
+                    <li></li>
+                    <li id="LI_GETHRData"><a href="javascript:void(0);" onclick="Go_GETHRData();">@ViewData["MENU_GETHRDATA"]</a></li> @*获取考勤*@
+                    <li></li>
+                    @*<li id="LI_BasicInformation1"><a href="javascript:void(0);" onclick="Go_DashBoardShow();">@ViewData["MENU_SETTING"]</a></li>
+                        <li></li>*@
+                    <li id="LI_HELPPAGE"><a href='~/HelpFile.html' target='_blank'>@ViewData["MENU_HELPPAGE"]</a></li>
+
+                    @*<li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                小菜单<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">jmeter</a></li>
+                                <li><a href="#">EJB</a></li>
+                                <li><a href="#">Jasper Report</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">分离的链接</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">另一个分离的链接</a></li>
+                            </ul>
+                        </li>*@
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <span id="notification" style="display:none;"></span>
+
+    <script id="errorTemplate" type="text/x-kendo-template">
+        <div class="wrong-pass">
+            <h3>#= title #</h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+    <script id="successTemplate" type="text/x-kendo-template">
+        <div class="upload-success">
+            <h3>#= message #</h3>
+        </div>
+    </script>
+    <div class="div1" id="loading"></div>
+    <div class="div2" id="dialog" style="padding-top:0"></div>
+
+
+    <div class="panel panel-default" id="div_left">
+        <table class="tb_1" border="1">
+            <tr style="width:100%">
+                <td class="td0" width="50%" style="text-align:center">
+                    <label class='L1' id="LBL_LINE">@ViewData["LBL_LINE"]</label> @*Line/组别:*@
+                    <label class='L2' id="LBL_LINE_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.line)</label>
+                    <p></p>
+                    <label class='L1' id="LBL_HEADCOUNT">@ViewData["LBL_HeadCount"]</label>
+                    <label class='L2' id="LBL_HEADCOUNT_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.HeadCount)</label>
+                </td>
+                <td class="td0" width="50%" style="text-align:center">
+                    <label class='L1' id="LBL_DATE">@ViewData["LBL_DATE"]</label>@*Date/日期:*@
+                    <p></p>
+                    <label class='L2' id="LBL_NowTime"></label>
+
+                </td>
+            </tr>
+
+            <tr style="width:100%">
+                <td class="td0" width="50%" style="text-align:center">
+                    <label class='L1' id="LBL_GONO">@ViewData["LBL_GONO"]</label>@*GO#:*@
+                    <label class='L2' id="LBL_GONO_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.GONO)</label>
+                </td>
+                <td class="td0" width="50%" style="text-align:center">
+                    <label class='L1' id="LBL_SAH">@ViewData["LBL_SAH"]</label>@*SAH:*@
+                    <label class='L2' id="LBL_SAH_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.SAH)</label>:
+                </td>
+            </tr>
+
+            <tr style="width:100%">
+                <td class="td0" width="50%" style="text-align:center">
+                    <label class='L1' id="LBL_OUTPUT_TARGET_E">@ViewData["LBL_OUTPUT_TARGET_E"]</label> @*Acc.OutPut/Acc.Target*@
+                    <p></p>
+                    @*<label class='L1' id="LBL_OUTPUT_TARGET_C">@ViewData["LBL_OUTPUT_TARGET_C"]</label>@*实际产量/目标产量*@
+                    <label class='L1' id="LBL_OUTPUT_TARGET_N">@ViewData["LBL_OUTPUT_TARGET_N"]</label>@*目标达成率*@
+                    <p></p>
+                    @*<label class='L5' id="LBL_ACTUAL_TARGET_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.ACTUAL_QTY)/@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Target_QTY)</label>*@
+                    <label class='L5' id="LBL_TARGET_COMPLETION_RATE">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Target_Completion_Rate)</label>
+
+                </td>
+                <td class="td0" width="50%" style="text-align:center">
+                    <label class='L1' id="LBL_PI_PASS_FAIL_E">@ViewData["LBL_PI_PASS_FAIL_E"]</label>@*PI PASS/PI FAIL*@
+                    <p></p>
+                    <label class='L1' id="LBL_PI_PASS_FAIL_C">@ViewData["LBL_PI_PASS_FAIL_C"]</label>@*正品\疵品:*@
+                    <p></p>
+                    <label class='L5' id="LBL_PI_PASS_FAIL_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.GOOD_GARMENT_QTY)/@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.WORKMANSHIP_DEFECT_QTY)</label>
+                </td>
+            </tr>
+
+            <tr style="width:100%">
+                <td class="td0" width="50%" style="text-align:center">
+                    <label class='L1' id="LBL_EFFICIENCY">@ViewData["LBL_EFFICIENCY"]</label>@*EFFICIENCY/效率*@
+                    <p></p>
+
+                    <label class='L5' id="LBL_EFFICIENCY_2"></label>
+                </td>
+                <td class="td0" width="50%" style="text-align:center">
+                    <label class='L1' id="LBL_FPY">@ViewData["LBL_FPY"]</label>@*FPY/通过率*@
+                    <p></p>
+                    <label class='L5' id="LBL_FPY_2">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Fpy).ToString()</label>
+                </td>
+            </tr>
+
+            <tr style="width:100%">
+                <td class="td0" colspan=2 width="100%" style="text-align:center">
+                    <label class='L3' id="LBL_LASTSHIFT">@ViewData["LBL_LASTSHIFT"]</label>@*LAST SHIFT DATA/上一班次数据*@
+                    <table class="tb_2" border="0" align="center">
+                        <tr>
+                            <td id="TD_DATE" class="td_c0">@ViewData["TD_DATE"]</td>@*Date:*@
+                            <td id="id_l1" class="td_c1">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.trsdate)</td>
+                            <td id="TD_FPY" class="td_c0">@ViewData["TD_FPY"]</td>@*FPY:*@
+                            <td id="id_l2" class="td_c1">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.Fpy)</td>
+                            <td id="TD_OUTPUT" class="td_c0">@ViewData["TD_OUTPUT"]</td>@*Output:*@
+                            <td id="id_l3" class="td_c1">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.ACTUAL_QTY)</td>
+                            <td id="TD_EFF" class="td_c0">@ViewData["TD_EFF"]</td>@*Eff:*@
+                            <td id="id_l4" class="td_c1">@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.Eff)</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="panel panel-default" id="div_right">
+        <table class="tb_1" border="1" id="TB_2">
+            <tr>
+                <td class="td0" width="25%" style="text-align:center">
+                    <label id="LBL_TIME_PERIOD_2" class='L1'>@ViewData["LBL_TIME_PERIOD_2"]</label> <p></p>
+                    <label id="LBL_TIME_PERIOD" class='L1'>@ViewData["LBL_TIME_PERIOD"]</label>
+                </td>@*时段*@
+
+                <td class="td0" width="25%" style="text-align:center">
+                    <label id="LBL_TARGET_HOURLY_2" class='L1'>@ViewData["LBL_TARGET_HOURLY_2"]</label><p></p>
+                    <label id="LBL_TARGET_HOURLY" class='L1'>@ViewData["LBL_TARGET_HOURLY"]</label>
+
+                </td>@*目标*@
+
+                <td class="td0" width="25%" style="text-align:center">
+                    <label id="LBL_OUTPUT_2" class='L1'>@ViewData["LBL_OUTPUT_2"]</label><p></p>
+                    <label id="LBL_OUTPUT" class='L1'>@ViewData["LBL_OUTPUT"]</label>
+                </td>@*OutPut 产量*@
+
+                <td class="td0" width="25%" style="text-align:center">
+                    <label id="LBL_DEFECTIVE_2" class='L1'>@ViewData["LBL_DEFECTIVE_2"]</label><p></p>
+                    <label id="LBL_DEFECTIVE" class='L1'>@ViewData["LBL_DEFECTIVE"]</label>
+                </td>@*疵品*@
+
+            </tr>
+            @{
+                int i = 0;
+                string LBL_TIME_;
+                string LBL_QTY_;
+
+                string LBL_TARGET_;
+                string LBL_DEFECTIVE_;
+
+                foreach (var item in Model.FN_DASHBOARD_TIME_INTERVAL_QTY_Result)
+                {
+                    i = i + 1;
+                    LBL_TIME_ = "LBL_TIME_" + i.ToString().Trim();
+                    LBL_QTY_ = "LBL_QTY_" + i.ToString().Trim();
+
+                    LBL_TARGET_ = "LBL_TARGET_" + i.ToString().Trim();
+                    LBL_DEFECTIVE_ = "LBL_DEFECTIVE_" + i.ToString().Trim();
+
+                    <tr style="width:100%">
+                        <td class="td0" width="25%" style="text-align:center">
+                            <label id=@LBL_TIME_ class='L2' name="time">@Html.DisplayFor(modelItem => item.TIME_PERIOD)</label>
+
+                        </td>
+
+                        <td class="td0" width="25%" style="text-align:center">
+                            <label id=@LBL_TARGET_ class='L2' name="targetqty">@Html.DisplayFor(modelItem => item.TARGET_QTY)</label>
+
+                        </td>
+
+                        <td class="td0" width="25%" style="text-align:center">
+                            <label id=@LBL_QTY_ class='L2' name="outqty">@Html.DisplayFor(modelItem => item.ACTUAL_QTY)</label>
+
+                        </td>
+
+                        <td class="td0" width="25%" style="text-align:center">
+                            <label id=@LBL_DEFECTIVE_ class='L2' name="defectqty">@Html.DisplayFor(modelItem => item.DEFECT_QTY)</label>
+
+                        </td>
+
+                    </tr>
+                }
+            }
+
+            <tr id="TTR_TOTAL" style="width:100%;color:blue">
+                <td class="td0" width="25%" style="text-align:center"><label id="LBL_TOTAL" class='L4'>@ViewData["LBL_TOTAL"]</label></td>@*Total汇总*@
+                <td colspan="3" class="td0" width="75%" style="text-align:center"><label class='L4' id="LBL_Total_Qty"></label></td>
+            </tr>
+        </table>
+
+    </div>
+
+
+</body>
+</html>
+
+<script>
+    var notificationInit;
+    NotificationInit();
+
+    var factorycd = "@Html.DisplayFor(model=> model.RUNNING_BASIC_INFORMATION.FACTORY_CD)";
+    var linecode = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.LINE_CODE)";
+    var shiftcode = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.SHIFT_CODE)";
+    var trxdate = getdate("@Html.DisplayFor(model=> model.RUNNING_BASIC_INFORMATION.TRX_DATE)", "S", "yyyy-MM-dd", 'N');
+    var only1line = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.Only1Line)";
+    var MSG_INQ_OK_T = "@ViewData["MSG_INQ_OK_T"]";
+    var MSG_INQ_OK = "@ViewData["MSG_INQ_OK"]"
+    var MSG_INQ_FAILED_T = "@ViewData["MSG_INQ_FAILED_T"]";
+    var MSG_INQ_FAILED = "@ViewData["MSG_INQ_FAILED"]";
+
+    var HR_MAX_TIME_DIFFERENCE = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.HR_MAX_TIME_DIFFERENCE)";
+    var HR_REFRESH_INTERVAL = "@Html.DisplayFor(model => model.RUNNING_BASIC_INFORMATION.HR_REFRESH_INTERVAL)";
+    var Eff = "@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Eff)";
+    var Fpy = "@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Fpy)";
+    var Target_Completion_Rate = "@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_DATA_Result.Target_Completion_Rate)";
+
+    var Eff_Pre="@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.Eff)";
+    var Fpy_Pre="@Html.DisplayFor(model => model.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result.Fpy)";
+
+    $(function () {
+        NotificationInit();
+        //(document).off('click.bs.dropdown.data-api');
+        //dropdownOpen();//调用
+
+        ShowAndHiddenMenu();
+
+        var actual = "@Html.DisplayFor(model =>  model.FN_DASHBOARD_SHOW_DATA_Result.ACTUAL_QTY)";
+        var target = "@Html.DisplayFor(model =>  model.FN_DASHBOARD_SHOW_DATA_Result.Target_QTY)";
+        var refreshtime = "@Html.DisplayFor(model =>  model.RUNNING_BASIC_INFORMATION.REFRESH_INTERVAL)";
+
+        document.getElementById('LBL_EFFICIENCY_2').innerHTML = parseInt(Eff).toString() + "%";
+        document.getElementById('LBL_FPY_2').innerHTML = parseInt(Fpy).toString() + "%";
+
+        document.getElementById('id_l2').innerHTML = parseInt(Eff).toString() + "%";
+        document.getElementById('id_l4').innerHTML = parseInt(Fpy).toString() + "%";
+
+        DashBoardShow_DataProcess(actual, target, HR_REFRESH_INTERVAL);
+
+        setInterval("RefreshData('" + factorycd + "','" + linecode + "','" + shiftcode + "','" + trxdate + "','" + only1line + "')", refreshtime * 1000 * 60);
+        setInterval("getnow('#LBL_NowTime')", 1000);
+
+    });
+
+    function ShowAndHiddenMenu()
+    {
+        var isShow=false;
+        $("#menu").hide();
+        $("#NoUseDiv").mouseover(function(){
+            $("#menu").show();
+            $(this).hide();
+            isShow=true;
+        });
+        //$("#menu").mouseover(function(){
+        //    isShow=true;
+        //    $(this).show();
+        //});
+        $("#menu").mouseout(function(){
+            $("#NoUseDiv").show();
+            $(this).hide();
+        });
+    }
+
+    /**    * 鼠标划过就展开子菜单，免得需要点击才能展开    */
+    //function dropdownOpen() {
+    //    var $dropdownLi = $('li.dropdown');
+    //    $dropdownLi.mouseover(function () {
+    //        $(this).addClass('open');
+    //    }).mouseout(function () {
+    //        $(this).removeClass('open');
+    //    });
+    //}
+
+
+</script>
+
+
+

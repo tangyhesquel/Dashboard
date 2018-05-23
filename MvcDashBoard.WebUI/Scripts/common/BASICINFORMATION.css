@@ -1,0 +1,33 @@
+﻿        th {
+               color: #32364c;
+            }
+        td{
+            font-size:18px;
+
+        }
+        input {
+            font:100;
+            font-style:normal;
+            background:blue;
+        }
+        label {
+            font-family:'Times New Roman', Times, serif
+        }
+
+        body{
+	    height: 60%;
+        width:60%;
+        margin: 100px;
+	    font-family:Segoe UI ;
+        content: normal;
+        font-family: Segoe UI;
+        font-size: 14.4px;
+        margin-bottom: 100px;
+        margin-left: 100px;
+        margin-right: 100px;
+        margin-top: 50px;
+        position: static;
+        z-index: auto;
+        align-self:center;   
+    }
+

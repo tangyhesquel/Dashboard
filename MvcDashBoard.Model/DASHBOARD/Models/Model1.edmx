@@ -1,0 +1,1047 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MESDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DASHBOARD_EMPLOYEE_ATTENDTIME">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FACTORY_CD" Type="nvarchar" MaxLength="10" />
+          <Property Name="EMPLOYEE_NO" Type="nvarchar" MaxLength="20" />
+          <Property Name="ATTEND_DATE" Type="datetime" />
+          <Property Name="CREATE_TIME" Type="datetime" />
+          <Property Name="SHIFT" Type="char" MaxLength="1" />
+          <Property Name="TRX_DATE" Type="datetime" />
+          <Property Name="PRODUCTION_LINE_CD" Type="nvarchar" MaxLength="15" />
+          <Property Name="FACTORY_EMPLOYEE_NO" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_LINE_RATIO">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FACTORY_CD" Type="nvarchar" MaxLength="10" />
+          <Property Name="PRODUCTION_LINE_CD" Type="nvarchar" MaxLength="10" />
+          <Property Name="HRIS_PRODUCTION_LINE_CD" Type="nvarchar" MaxLength="30" />
+          <Property Name="RATIO" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="ACTIVE" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_LINE_SHIFT_SETTING">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FACTORY_CD" Type="nvarchar" MaxLength="10" />
+          <Property Name="SHIFT_CODE" Type="nvarchar" MaxLength="10" />
+          <Property Name="SHIFT_DESC" Type="nvarchar" MaxLength="30" />
+          <Property Name="SHIFT_SEQ" Type="int" />
+          <Property Name="SHIFT_From" Type="time" Precision="7" />
+          <Property Name="SHIFT_TO" Type="time" Precision="7" />
+          <Property Name="TIME_INTERVAL" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_MESSAGE_DEFINITION">
+          <Key>
+            <PropertyRef Name="FORM_NAME" />
+            <PropertyRef Name="CONTROLLER_ID" />
+            <PropertyRef Name="CONTROLLER_TYPE" />
+          </Key>
+          <Property Name="FORM_NAME" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CONTROLLER_ID" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="CONTROLLER_TYPE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DESC_EN" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESC_CN" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESC_VN" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_PRODUCTION_DATA">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FACTORY_CD" Type="nvarchar" MaxLength="10" />
+          <Property Name="PRODUCTION_LINE_CD" Type="nvarchar" MaxLength="20" />
+          <Property Name="GO_NO" Type="nvarchar" MaxLength="20" />
+          <Property Name="GARMENT_TYPE_CD" Type="nvarchar" MaxLength="6" />
+          <Property Name="GO_JO_NO" Type="nvarchar" MaxLength="20" />
+          <Property Name="CUT_QTY" Type="int" />
+          <Property Name="ACTUAL_QTY" Type="int" />
+          <Property Name="GOOD_GARMENT_QTY" Type="int" />
+          <Property Name="REWORKED_GOOD_GARMENT_QTY" Type="int" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY" Type="int" />
+          <Property Name="INSPECT_QTY" Type="int" />
+          <Property Name="NON_WORKMANSHIP_DEFECT_QTY" Type="int" />
+          <Property Name="PASS_RATES" Type="decimal" Precision="18" Scale="14" />
+          <Property Name="SAH" Type="decimal" Precision="10" Scale="4" />
+          <Property Name="LAST_MODIFY_DATE" Type="datetime" />
+          <Property Name="Create_Time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_QA_PI_HD">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="decimal" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PI_HD_ID" Type="bigint" Nullable="false" />
+          <Property Name="GO_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="JO_NO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="COLOR_CODE" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="INSPECT_QTY" Type="int" Nullable="false" />
+          <Property Name="GOOD_GARMENT_QTY" Type="int" Nullable="false" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY" Type="int" Nullable="false" />
+          <Property Name="NON_WORKMANSHIP_DEFECT_QTY" Type="int" Nullable="false" />
+          <Property Name="ISLOCK" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="INSPECT_DATE" Type="datetime" Nullable="false" />
+          <Property Name="CREATE_DATE" Type="datetime" Nullable="false" />
+          <Property Name="CREATE_USERID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LAST_MODIFY_DATE" Type="datetime" Nullable="false" />
+          <Property Name="LAST_MODIFY_USERID" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CUT_QTY" Type="int" Nullable="false" />
+          <Property Name="FACTORY_CD" Type="nvarchar" MaxLength="10" />
+          <Property Name="GARMENT_TYPE_CD" Type="nvarchar" MaxLength="10" />
+          <Property Name="GO_JO_NO" Type="nvarchar" MaxLength="50" />
+          <Property Name="REWORKED_GOOD_GARMENT_QTY" Type="int" Nullable="false" />
+          <Property Name="TYPE" Type="nvarchar" MaxLength="10" />
+          <Property Name="VERSION" Type="int" />
+          <Property Name="UPLOAD_MES_FLAG" Type="char" MaxLength="1" />
+          <Property Name="UPLOAD_MES_DATE" Type="datetime" />
+          <Property Name="WORK_FINAL_DATE" Type="datetime" Nullable="false" />
+          <Property Name="TransferFlag" Type="nvarchar" MaxLength="1" />
+          <Property Name="PROCESS_FLAG" Type="nvarchar" MaxLength="20" />
+          <Property Name="INSPECT_QTY_1" Type="int" />
+          <Property Name="GOOD_GARMENT_QTY_1" Type="int" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY_1" Type="int" />
+          <Property Name="NON_WORKMANSHIP_DEFECT_QTY_1" Type="int" />
+          <Property Name="REWORKED_GOOD_GARMENT_QTY_1" Type="int" />
+        </EntityType>
+        <Function Name="FN_DASHBOARD_DETAIL_QTY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRSdate" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="SEQNO" Type="int" Nullable="false" />
+                <Property Name="FACTORY_CD" Type="nvarchar" MaxLength="10" />
+                <Property Name="PRODUCTION_LINE_CD" Type="nvarchar" MaxLength="20" />
+                <Property Name="GO_NO" Type="nvarchar" MaxLength="20" />
+                <Property Name="GARMENT_TYPE_CD" Type="nvarchar" MaxLength="6" />
+                <Property Name="GO_JO_NO" Type="nvarchar" MaxLength="20" />
+                <Property Name="CUT_QTY" Type="int" />
+                <Property Name="ACTUAL_QTY" Type="int" />
+                <Property Name="GOOD_GARMENT_QTY" Type="int" />
+                <Property Name="REWORKED_GOOD_GARMENT_QTY" Type="int" />
+                <Property Name="WORKMANSHIP_DEFECT_QTY" Type="int" />
+                <Property Name="INSPECT_QTY" Type="int" />
+                <Property Name="NON_WORKMANSHIP_DEFECT_QTY" Type="int" />
+                <Property Name="PASS_RATES" Type="decimal" Precision="18" Scale="14" />
+                <Property Name="SAH" Type="decimal" Precision="10" Scale="4" />
+                <Property Name="LAST_MODIFY_DATE" Type="datetime" />
+                <Property Name="Create_Time" Type="datetime" />
+                <Property Name="fromtime" Type="datetime" />
+                <Property Name="totime" Type="datetime" />
+                <Property Name="seq" Type="int" />
+                <Property Name="TIME_INTERVAL" Type="decimal" Precision="8" Scale="2" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_FACTORY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="FACTORY_ID" Type="nvarchar" MaxLength="10" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_GARMENT_TYPE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="GARMENT_TYPE" Type="varchar" MaxLength="1" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_LINE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="PRODUCTION_LINE_CD" Type="nvarchar" MaxLength="10" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_LINE_ACTUAL_HEAD_COUNT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="PRODUCTION_LINE_CD" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="FACTORY_CD" Type="nvarchar" MaxLength="10" />
+                <Property Name="PRODUCTION_LINE_CD" Type="nvarchar" MaxLength="10" />
+                <Property Name="EMPLOYEE_ID" Type="nvarchar" MaxLength="10" />
+                <Property Name="RATIO" Type="decimal" Precision="8" Scale="2" />
+                <Property Name="ACTAUL_LINE_CD" Type="nvarchar" MaxLength="20" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_LINE_RATIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="PRODUCTION_LINE_CD" Type="nvarchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="FACTORY_CD" Type="nvarchar" MaxLength="20" />
+                <Property Name="PRODUCTION_LINE_CD" Type="nvarchar" MaxLength="30" />
+                <Property Name="RATIO" Type="decimal" Precision="8" Scale="2" />
+                <Property Name="ACTAUL_LINE_CD" Type="nvarchar" MaxLength="20" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_NEXT_SHIFT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FN_DASHBOARD_PREVIOUS_SHIFT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="nvarchar">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FN_DASHBOARD_PREVIOUS_SHIFT_DATE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRX_DATE" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="TRX_DATE" Type="datetime" />
+                <Property Name="SHIFT_CD" Type="nvarchar" MaxLength="10" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_PRODUCTION_QTY_BY_SHIFT_LINE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRSdate" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="FROM_TIME" Type="int" />
+                <Property Name="TO_TIME" Type="int" />
+                <Property Name="ACTUAL_QTY" Type="int" Nullable="false" />
+                <Property Name="seq" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_SHIFT_TIME_SCHEDULE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+          <Parameter Name="TrsDate" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="fromtime" Type="datetime" />
+                <Property Name="totime" Type="datetime" />
+                <Property Name="seq" Type="int" />
+                <Property Name="TIME_INTERVAL" Type="decimal" Precision="8" Scale="2" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_SHOW" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+          <Parameter Name="PARAMDATE" Type="datetime" Mode="In" />
+          <Parameter Name="Type" Type="char" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="factory_cd" Type="nvarchar" MaxLength="10" />
+                <Property Name="line" Type="nvarchar" MaxLength="15" />
+                <Property Name="trsdate" Type="datetime" />
+                <Property Name="shift_cd" Type="nvarchar" MaxLength="2" />
+                <Property Name="HeadCount" Type="int" />
+                <Property Name="GONO" Type="nvarchar" MaxLength="20" />
+                <Property Name="SAH" Type="decimal" Precision="12" Scale="4" />
+                <Property Name="ACTUAL_QTY" Type="int" />
+                <Property Name="GOOD_GARMENT_QTY" Type="int" />
+                <Property Name="WORKMANSHIP_DEFECT_QTY" Type="int" />
+                <Property Name="INSPECT_QTY" Type="int" />
+                <Property Name="Target_QTY" Type="int" />
+                <Property Name="Eff" Type="decimal" Precision="12" Scale="4" />
+                <Property Name="Fpy" Type="decimal" Precision="12" Scale="4" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_SHOW_DATA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+          <Parameter Name="PARAMDATE" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="factory_cd" Type="nvarchar" MaxLength="10" />
+                <Property Name="line" Type="nvarchar" MaxLength="15" />
+                <Property Name="trsdate" Type="datetime" />
+                <Property Name="shift_cd" Type="nvarchar" MaxLength="2" />
+                <Property Name="HeadCount" Type="int" />
+                <Property Name="GONO" Type="nvarchar" MaxLength="20" />
+                <Property Name="SAH" Type="decimal" Precision="12" Scale="4" />
+                <Property Name="ACTUAL_QTY" Type="int" />
+                <Property Name="GOOD_GARMENT_QTY" Type="int" />
+                <Property Name="WORKMANSHIP_DEFECT_QTY" Type="int" />
+                <Property Name="INSPECT_QTY" Type="int" />
+                <Property Name="Target_QTY" Type="int" />
+                <Property Name="Eff" Type="decimal" Precision="12" Scale="4" />
+                <Property Name="Fpy" Type="decimal" Precision="12" Scale="4" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_SHOW_PREVIOUS_DATA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <Parameter Name="shift_cd" Type="nvarchar" Mode="In" />
+          <Parameter Name="PARAMDATE" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="factory_cd" Type="nvarchar" MaxLength="10" />
+                <Property Name="line" Type="nvarchar" MaxLength="15" />
+                <Property Name="trsdate" Type="datetime" />
+                <Property Name="shift_cd" Type="nvarchar" MaxLength="2" />
+                <Property Name="HeadCount" Type="int" />
+                <Property Name="GONO" Type="nvarchar" MaxLength="20" />
+                <Property Name="SAH" Type="decimal" Precision="12" Scale="4" />
+                <Property Name="ACTUAL_QTY" Type="int" />
+                <Property Name="GOOD_GARMENT_QTY" Type="int" />
+                <Property Name="WORKMANSHIP_DEFECT_QTY" Type="int" />
+                <Property Name="INSPECT_QTY" Type="int" />
+                <Property Name="Target_QTY" Type="int" />
+                <Property Name="Eff" Type="decimal" Precision="12" Scale="4" />
+                <Property Name="Fpy" Type="decimal" Precision="12" Scale="4" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_TARGET_QTY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRSdate" Type="datetime" Mode="In" />
+          <Parameter Name="Time_Minute" Type="int" Mode="In" />
+          <Parameter Name="HeadCount" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="fromtime" Type="datetime" />
+                <Property Name="totime" Type="datetime" />
+                <Property Name="seq" Type="int" />
+                <Property Name="GO_NO" Type="nvarchar" MaxLength="20" />
+                <Property Name="SAH" Type="decimal" Precision="12" Scale="4" />
+                <Property Name="LAST_MODIFY_DATE" Type="datetime" />
+                <Property Name="Target_QTY" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="FN_DASHBOARD_TIME_INTERVAL_QTY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+          <Parameter Name="TRSdate" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="TIME_PERIOD" Type="varchar" MaxLength="23" />
+                <Property Name="ACTUAL_QTY" Type="int" Nullable="false" />
+                <Property Name="SEQ" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="PROC_DASHBOARD_GET_EMPLOYEE_ATTENDTIME" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+          <Parameter Name="SHIFT" Type="nvarchar" Mode="In" />
+          <Parameter Name="ParamDateTime" Type="datetime" Mode="In" />
+          <Parameter Name="Only1Line" Type="char" Mode="In" />
+        </Function>
+        <Function Name="PROC_DASHBOARD_GET_PRODUCTION_QTY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FACTORY_CD" Type="nvarchar" Mode="In" />
+          <Parameter Name="LINE" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="MESDBModelStoreContainer">
+          <EntitySet Name="DASHBOARD_EMPLOYEE_ATTENDTIME" EntityType="Self.DASHBOARD_EMPLOYEE_ATTENDTIME" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DASHBOARD_LINE_RATIO" EntityType="Self.DASHBOARD_LINE_RATIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DASHBOARD_LINE_SHIFT_SETTING" EntityType="Self.DASHBOARD_LINE_SHIFT_SETTING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DASHBOARD_MESSAGE_DEFINITION" EntityType="Self.DASHBOARD_MESSAGE_DEFINITION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DASHBOARD_PRODUCTION_DATA" EntityType="Self.DASHBOARD_PRODUCTION_DATA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DASHBOARD_QA_PI_HD" EntityType="Self.DASHBOARD_QA_PI_HD" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MESDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="FN_DASHBOARD_DETAIL_QTY_Result">
+          <Property Name="SEQNO" Type="Int32" Nullable="false" />
+          <Property Name="FACTORY_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCTION_LINE_CD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GO_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GARMENT_TYPE_CD" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="GO_JO_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CUT_QTY" Type="Int32" />
+          <Property Name="ACTUAL_QTY" Type="Int32" />
+          <Property Name="GOOD_GARMENT_QTY" Type="Int32" />
+          <Property Name="REWORKED_GOOD_GARMENT_QTY" Type="Int32" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY" Type="Int32" />
+          <Property Name="INSPECT_QTY" Type="Int32" />
+          <Property Name="NON_WORKMANSHIP_DEFECT_QTY" Type="Int32" />
+          <Property Name="PASS_RATES" Type="Decimal" Precision="18" Scale="14" />
+          <Property Name="SAH" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="LAST_MODIFY_DATE" Type="DateTime" />
+          <Property Name="Create_Time" Type="DateTime" />
+          <Property Name="fromtime" Type="DateTime" />
+          <Property Name="totime" Type="DateTime" />
+          <Property Name="seq" Type="Int32" />
+          <Property Name="TIME_INTERVAL" Type="Decimal" Precision="8" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_FACTORY_Result">
+          <Property Name="FACTORY_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_GARMENT_TYPE_Result">
+          <Property Name="GARMENT_TYPE" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_LINE_Result">
+          <Property Name="PRODUCTION_LINE_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_LINE_ACTUAL_HEAD_COUNT_Result">
+          <Property Name="FACTORY_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCTION_LINE_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EMPLOYEE_ID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RATIO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="ACTAUL_LINE_CD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_LINE_RATIO_Result">
+          <Property Name="FACTORY_CD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCTION_LINE_CD" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RATIO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="ACTAUL_LINE_CD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_PREVIOUS_SHIFT_DATE_Result">
+          <Property Name="TRX_DATE" Type="DateTime" />
+          <Property Name="SHIFT_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_PRODUCTION_QTY_BY_SHIFT_LINE_Result">
+          <Property Name="FROM_TIME" Type="Int32" />
+          <Property Name="TO_TIME" Type="Int32" />
+          <Property Name="ACTUAL_QTY" Type="Int32" Nullable="false" />
+          <Property Name="seq" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_SHIFT_TIME_SCHEDULE_Result">
+          <Property Name="fromtime" Type="DateTime" />
+          <Property Name="totime" Type="DateTime" />
+          <Property Name="seq" Type="Int32" />
+          <Property Name="TIME_INTERVAL" Type="Decimal" Precision="8" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_SHOW_Result">
+          <Property Name="factory_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="line" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="trsdate" Type="DateTime" />
+          <Property Name="shift_cd" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="HeadCount" Type="Int32" />
+          <Property Name="GONO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SAH" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="ACTUAL_QTY" Type="Int32" />
+          <Property Name="GOOD_GARMENT_QTY" Type="Int32" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY" Type="Int32" />
+          <Property Name="INSPECT_QTY" Type="Int32" />
+          <Property Name="Target_QTY" Type="Int32" />
+          <Property Name="Eff" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="Fpy" Type="Decimal" Precision="12" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_SHOW_DATA_Result">
+          <Property Name="factory_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="line" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="trsdate" Type="DateTime" />
+          <Property Name="shift_cd" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="HeadCount" Type="Int32" />
+          <Property Name="GONO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SAH" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="ACTUAL_QTY" Type="Int32" />
+          <Property Name="GOOD_GARMENT_QTY" Type="Int32" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY" Type="Int32" />
+          <Property Name="INSPECT_QTY" Type="Int32" />
+          <Property Name="Target_QTY" Type="Int32" />
+          <Property Name="Eff" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="Fpy" Type="Decimal" Precision="12" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result">
+          <Property Name="factory_cd" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="line" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="trsdate" Type="DateTime" />
+          <Property Name="shift_cd" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="HeadCount" Type="Int32" />
+          <Property Name="GONO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SAH" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="ACTUAL_QTY" Type="Int32" />
+          <Property Name="GOOD_GARMENT_QTY" Type="Int32" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY" Type="Int32" />
+          <Property Name="INSPECT_QTY" Type="Int32" />
+          <Property Name="Target_QTY" Type="Int32" />
+          <Property Name="Eff" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="Fpy" Type="Decimal" Precision="12" Scale="4" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_TARGET_QTY_Result">
+          <Property Name="fromtime" Type="DateTime" />
+          <Property Name="totime" Type="DateTime" />
+          <Property Name="seq" Type="Int32" />
+          <Property Name="GO_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SAH" Type="Decimal" Precision="12" Scale="4" />
+          <Property Name="LAST_MODIFY_DATE" Type="DateTime" />
+          <Property Name="Target_QTY" Type="Int32" />
+        </ComplexType>
+        <ComplexType Name="FN_DASHBOARD_TIME_INTERVAL_QTY_Result">
+          <Property Name="TIME_PERIOD" Type="String" MaxLength="23" FixedLength="false" Unicode="false" />
+          <Property Name="ACTUAL_QTY" Type="Int32" Nullable="false" />
+          <Property Name="SEQ" Type="Int32" />
+        </ComplexType>
+        <EntityType Name="DASHBOARD_EMPLOYEE_ATTENDTIME">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FACTORY_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="EMPLOYEE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ATTEND_DATE" Type="DateTime" Precision="3" />
+          <Property Name="CREATE_TIME" Type="DateTime" Precision="3" />
+          <Property Name="SHIFT" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TRX_DATE" Type="DateTime" Precision="3" />
+          <Property Name="PRODUCTION_LINE_CD" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="FACTORY_EMPLOYEE_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_LINE_RATIO">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FACTORY_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCTION_LINE_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="HRIS_PRODUCTION_LINE_CD" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RATIO" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="ACTIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_LINE_SHIFT_SETTING">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FACTORY_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SHIFT_CODE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SHIFT_DESC" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SHIFT_SEQ" Type="Int32" />
+          <Property Name="SHIFT_From" Type="Time" Precision="7" />
+          <Property Name="SHIFT_TO" Type="Time" Precision="7" />
+          <Property Name="TIME_INTERVAL" Type="Decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_MESSAGE_DEFINITION">
+          <Key>
+            <PropertyRef Name="FORM_NAME" />
+            <PropertyRef Name="CONTROLLER_ID" />
+            <PropertyRef Name="CONTROLLER_TYPE" />
+          </Key>
+          <Property Name="FORM_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CONTROLLER_ID" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CONTROLLER_TYPE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DESC_EN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESC_CN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESC_VN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_PRODUCTION_DATA">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FACTORY_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PRODUCTION_LINE_CD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GO_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GARMENT_TYPE_CD" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="GO_JO_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CUT_QTY" Type="Int32" />
+          <Property Name="ACTUAL_QTY" Type="Int32" />
+          <Property Name="GOOD_GARMENT_QTY" Type="Int32" />
+          <Property Name="REWORKED_GOOD_GARMENT_QTY" Type="Int32" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY" Type="Int32" />
+          <Property Name="INSPECT_QTY" Type="Int32" />
+          <Property Name="NON_WORKMANSHIP_DEFECT_QTY" Type="Int32" />
+          <Property Name="PASS_RATES" Type="Decimal" Precision="18" Scale="14" />
+          <Property Name="SAH" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="LAST_MODIFY_DATE" Type="DateTime" Precision="3" />
+          <Property Name="Create_Time" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="DASHBOARD_QA_PI_HD">
+          <Key>
+            <PropertyRef Name="SEQNO" />
+          </Key>
+          <Property Name="SEQNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PI_HD_ID" Type="Int64" Nullable="false" />
+          <Property Name="GO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="JO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="COLOR_CODE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="INSPECT_QTY" Type="Int32" Nullable="false" />
+          <Property Name="GOOD_GARMENT_QTY" Type="Int32" Nullable="false" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY" Type="Int32" Nullable="false" />
+          <Property Name="NON_WORKMANSHIP_DEFECT_QTY" Type="Int32" Nullable="false" />
+          <Property Name="ISLOCK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="INSPECT_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREATE_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CREATE_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LAST_MODIFY_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LAST_MODIFY_USERID" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CUT_QTY" Type="Int32" Nullable="false" />
+          <Property Name="FACTORY_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="GARMENT_TYPE_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="GO_JO_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="REWORKED_GOOD_GARMENT_QTY" Type="Int32" Nullable="false" />
+          <Property Name="TYPE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="VERSION" Type="Int32" />
+          <Property Name="UPLOAD_MES_FLAG" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="UPLOAD_MES_DATE" Type="DateTime" Precision="3" />
+          <Property Name="WORK_FINAL_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransferFlag" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="PROCESS_FLAG" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="INSPECT_QTY_1" Type="Int32" />
+          <Property Name="GOOD_GARMENT_QTY_1" Type="Int32" />
+          <Property Name="WORKMANSHIP_DEFECT_QTY_1" Type="Int32" />
+          <Property Name="NON_WORKMANSHIP_DEFECT_QTY_1" Type="Int32" />
+          <Property Name="REWORKED_GOOD_GARMENT_QTY_1" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DASHBOARD_EMPLOYEE_ATTENDTIME" EntityType="Self.DASHBOARD_EMPLOYEE_ATTENDTIME" />
+          <EntitySet Name="DASHBOARD_LINE_RATIO" EntityType="Self.DASHBOARD_LINE_RATIO" />
+          <EntitySet Name="DASHBOARD_LINE_SHIFT_SETTING" EntityType="Self.DASHBOARD_LINE_SHIFT_SETTING" />
+          <EntitySet Name="DASHBOARD_MESSAGE_DEFINITION" EntityType="Self.DASHBOARD_MESSAGE_DEFINITION" />
+          <EntitySet Name="DASHBOARD_PRODUCTION_DATA" EntityType="Self.DASHBOARD_PRODUCTION_DATA" />
+          <EntitySet Name="DASHBOARD_QA_PI_HD" EntityType="Self.DASHBOARD_QA_PI_HD" />
+          <FunctionImport Name="FN_DASHBOARD_DETAIL_QTY" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_DETAIL_QTY_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+            <Parameter Name="SHIFT" Mode="In" Type="String" />
+            <Parameter Name="TRSdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_FACTORY" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_FACTORY_Result)">
+          <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_GARMENT_TYPE" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_GARMENT_TYPE_Result)" />
+          <FunctionImport Name="FN_DASHBOARD_LINE" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_LINE_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_LINE_ACTUAL_HEAD_COUNT" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_LINE_ACTUAL_HEAD_COUNT_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="PRODUCTION_LINE_CD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_LINE_RATIO" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_LINE_RATIO_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="PRODUCTION_LINE_CD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_PREVIOUS_SHIFT_DATE" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_PREVIOUS_SHIFT_DATE_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="SHIFT_CD" Mode="In" Type="String" />
+            <Parameter Name="TRX_DATE" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_PRODUCTION_QTY_BY_SHIFT_LINE" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_PRODUCTION_QTY_BY_SHIFT_LINE_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+            <Parameter Name="SHIFT" Mode="In" Type="String" />
+            <Parameter Name="TRSdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_SHIFT_TIME_SCHEDULE" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_SHIFT_TIME_SCHEDULE_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="SHIFT" Mode="In" Type="String" />
+            <Parameter Name="TrsDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_SHOW" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_SHOW_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+            <Parameter Name="SHIFT" Mode="In" Type="String" />
+            <Parameter Name="PARAMDATE" Mode="In" Type="DateTime" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_SHOW_DATA" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_SHOW_DATA_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+            <Parameter Name="SHIFT" Mode="In" Type="String" />
+            <Parameter Name="PARAMDATE" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_SHOW_PREVIOUS_DATA" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+            <Parameter Name="shift_cd" Mode="In" Type="String" />
+            <Parameter Name="PARAMDATE" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_TARGET_QTY" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_TARGET_QTY_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+            <Parameter Name="SHIFT" Mode="In" Type="String" />
+            <Parameter Name="TRSdate" Mode="In" Type="DateTime" />
+            <Parameter Name="Time_Minute" Mode="In" Type="Int32" />
+            <Parameter Name="HeadCount" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FN_DASHBOARD_TIME_INTERVAL_QTY" IsComposable="true" ReturnType="Collection(MESDBModel.FN_DASHBOARD_TIME_INTERVAL_QTY_Result)">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+            <Parameter Name="SHIFT" Mode="In" Type="String" />
+            <Parameter Name="TRSdate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="PROC_DASHBOARD_GET_EMPLOYEE_ATTENDTIME">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+            <Parameter Name="SHIFT" Mode="In" Type="String" />
+            <Parameter Name="ParamDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="Only1Line" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PROC_DASHBOARD_GET_PRODUCTION_QTY">
+            <Parameter Name="FACTORY_CD" Mode="In" Type="String" />
+            <Parameter Name="LINE" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MESDBModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="DASHBOARD_EMPLOYEE_ATTENDTIME">
+            <EntityTypeMapping TypeName="MESDBModel.DASHBOARD_EMPLOYEE_ATTENDTIME">
+              <MappingFragment StoreEntitySet="DASHBOARD_EMPLOYEE_ATTENDTIME">
+                <ScalarProperty Name="FACTORY_EMPLOYEE_NO" ColumnName="FACTORY_EMPLOYEE_NO" />
+                <ScalarProperty Name="SEQNO" ColumnName="SEQNO" />
+                <ScalarProperty Name="FACTORY_CD" ColumnName="FACTORY_CD" />
+                <ScalarProperty Name="EMPLOYEE_NO" ColumnName="EMPLOYEE_NO" />
+                <ScalarProperty Name="ATTEND_DATE" ColumnName="ATTEND_DATE" />
+                <ScalarProperty Name="CREATE_TIME" ColumnName="CREATE_TIME" />
+                <ScalarProperty Name="SHIFT" ColumnName="SHIFT" />
+                <ScalarProperty Name="TRX_DATE" ColumnName="TRX_DATE" />
+                <ScalarProperty Name="PRODUCTION_LINE_CD" ColumnName="PRODUCTION_LINE_CD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DASHBOARD_LINE_RATIO">
+            <EntityTypeMapping TypeName="MESDBModel.DASHBOARD_LINE_RATIO">
+              <MappingFragment StoreEntitySet="DASHBOARD_LINE_RATIO">
+                <ScalarProperty Name="SEQNO" ColumnName="SEQNO" />
+                <ScalarProperty Name="FACTORY_CD" ColumnName="FACTORY_CD" />
+                <ScalarProperty Name="PRODUCTION_LINE_CD" ColumnName="PRODUCTION_LINE_CD" />
+                <ScalarProperty Name="HRIS_PRODUCTION_LINE_CD" ColumnName="HRIS_PRODUCTION_LINE_CD" />
+                <ScalarProperty Name="RATIO" ColumnName="RATIO" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DASHBOARD_LINE_SHIFT_SETTING">
+            <EntityTypeMapping TypeName="MESDBModel.DASHBOARD_LINE_SHIFT_SETTING">
+              <MappingFragment StoreEntitySet="DASHBOARD_LINE_SHIFT_SETTING">
+                <ScalarProperty Name="SEQNO" ColumnName="SEQNO" />
+                <ScalarProperty Name="FACTORY_CD" ColumnName="FACTORY_CD" />
+                <ScalarProperty Name="SHIFT_CODE" ColumnName="SHIFT_CODE" />
+                <ScalarProperty Name="SHIFT_DESC" ColumnName="SHIFT_DESC" />
+                <ScalarProperty Name="SHIFT_SEQ" ColumnName="SHIFT_SEQ" />
+                <ScalarProperty Name="SHIFT_From" ColumnName="SHIFT_From" />
+                <ScalarProperty Name="SHIFT_TO" ColumnName="SHIFT_TO" />
+                <ScalarProperty Name="TIME_INTERVAL" ColumnName="TIME_INTERVAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DASHBOARD_MESSAGE_DEFINITION">
+            <EntityTypeMapping TypeName="MESDBModel.DASHBOARD_MESSAGE_DEFINITION">
+              <MappingFragment StoreEntitySet="DASHBOARD_MESSAGE_DEFINITION">
+                <ScalarProperty Name="FORM_NAME" ColumnName="FORM_NAME" />
+                <ScalarProperty Name="CONTROLLER_ID" ColumnName="CONTROLLER_ID" />
+                <ScalarProperty Name="CONTROLLER_TYPE" ColumnName="CONTROLLER_TYPE" />
+                <ScalarProperty Name="DESC_EN" ColumnName="DESC_EN" />
+                <ScalarProperty Name="DESC_CN" ColumnName="DESC_CN" />
+                <ScalarProperty Name="DESC_VN" ColumnName="DESC_VN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DASHBOARD_PRODUCTION_DATA">
+            <EntityTypeMapping TypeName="MESDBModel.DASHBOARD_PRODUCTION_DATA">
+              <MappingFragment StoreEntitySet="DASHBOARD_PRODUCTION_DATA">
+                <ScalarProperty Name="SEQNO" ColumnName="SEQNO" />
+                <ScalarProperty Name="FACTORY_CD" ColumnName="FACTORY_CD" />
+                <ScalarProperty Name="PRODUCTION_LINE_CD" ColumnName="PRODUCTION_LINE_CD" />
+                <ScalarProperty Name="GO_NO" ColumnName="GO_NO" />
+                <ScalarProperty Name="GARMENT_TYPE_CD" ColumnName="GARMENT_TYPE_CD" />
+                <ScalarProperty Name="GO_JO_NO" ColumnName="GO_JO_NO" />
+                <ScalarProperty Name="CUT_QTY" ColumnName="CUT_QTY" />
+                <ScalarProperty Name="ACTUAL_QTY" ColumnName="ACTUAL_QTY" />
+                <ScalarProperty Name="GOOD_GARMENT_QTY" ColumnName="GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="REWORKED_GOOD_GARMENT_QTY" ColumnName="REWORKED_GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="WORKMANSHIP_DEFECT_QTY" ColumnName="WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="INSPECT_QTY" ColumnName="INSPECT_QTY" />
+                <ScalarProperty Name="NON_WORKMANSHIP_DEFECT_QTY" ColumnName="NON_WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="PASS_RATES" ColumnName="PASS_RATES" />
+                <ScalarProperty Name="SAH" ColumnName="SAH" />
+                <ScalarProperty Name="LAST_MODIFY_DATE" ColumnName="LAST_MODIFY_DATE" />
+                <ScalarProperty Name="Create_Time" ColumnName="Create_Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DASHBOARD_QA_PI_HD">
+            <EntityTypeMapping TypeName="MESDBModel.DASHBOARD_QA_PI_HD">
+              <MappingFragment StoreEntitySet="DASHBOARD_QA_PI_HD">
+                <ScalarProperty Name="SEQNO" ColumnName="SEQNO" />
+                <ScalarProperty Name="PI_HD_ID" ColumnName="PI_HD_ID" />
+                <ScalarProperty Name="GO_NO" ColumnName="GO_NO" />
+                <ScalarProperty Name="JO_NO" ColumnName="JO_NO" />
+                <ScalarProperty Name="COLOR_CODE" ColumnName="COLOR_CODE" />
+                <ScalarProperty Name="INSPECT_QTY" ColumnName="INSPECT_QTY" />
+                <ScalarProperty Name="GOOD_GARMENT_QTY" ColumnName="GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="WORKMANSHIP_DEFECT_QTY" ColumnName="WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="NON_WORKMANSHIP_DEFECT_QTY" ColumnName="NON_WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="ISLOCK" ColumnName="ISLOCK" />
+                <ScalarProperty Name="INSPECT_DATE" ColumnName="INSPECT_DATE" />
+                <ScalarProperty Name="CREATE_DATE" ColumnName="CREATE_DATE" />
+                <ScalarProperty Name="CREATE_USERID" ColumnName="CREATE_USERID" />
+                <ScalarProperty Name="LAST_MODIFY_DATE" ColumnName="LAST_MODIFY_DATE" />
+                <ScalarProperty Name="LAST_MODIFY_USERID" ColumnName="LAST_MODIFY_USERID" />
+                <ScalarProperty Name="CUT_QTY" ColumnName="CUT_QTY" />
+                <ScalarProperty Name="FACTORY_CD" ColumnName="FACTORY_CD" />
+                <ScalarProperty Name="GARMENT_TYPE_CD" ColumnName="GARMENT_TYPE_CD" />
+                <ScalarProperty Name="GO_JO_NO" ColumnName="GO_JO_NO" />
+                <ScalarProperty Name="REWORKED_GOOD_GARMENT_QTY" ColumnName="REWORKED_GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="VERSION" ColumnName="VERSION" />
+                <ScalarProperty Name="UPLOAD_MES_FLAG" ColumnName="UPLOAD_MES_FLAG" />
+                <ScalarProperty Name="UPLOAD_MES_DATE" ColumnName="UPLOAD_MES_DATE" />
+                <ScalarProperty Name="WORK_FINAL_DATE" ColumnName="WORK_FINAL_DATE" />
+                <ScalarProperty Name="TransferFlag" ColumnName="TransferFlag" />
+                <ScalarProperty Name="PROCESS_FLAG" ColumnName="PROCESS_FLAG" />
+                <ScalarProperty Name="INSPECT_QTY_1" ColumnName="INSPECT_QTY_1" />
+                <ScalarProperty Name="GOOD_GARMENT_QTY_1" ColumnName="GOOD_GARMENT_QTY_1" />
+                <ScalarProperty Name="WORKMANSHIP_DEFECT_QTY_1" ColumnName="WORKMANSHIP_DEFECT_QTY_1" />
+                <ScalarProperty Name="NON_WORKMANSHIP_DEFECT_QTY_1" ColumnName="NON_WORKMANSHIP_DEFECT_QTY_1" />
+                <ScalarProperty Name="REWORKED_GOOD_GARMENT_QTY_1" ColumnName="REWORKED_GOOD_GARMENT_QTY_1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_DETAIL_QTY" FunctionImportName="FN_DASHBOARD_DETAIL_QTY">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_DETAIL_QTY_Result">
+                <ScalarProperty Name="SEQNO" ColumnName="SEQNO" />
+                <ScalarProperty Name="FACTORY_CD" ColumnName="FACTORY_CD" />
+                <ScalarProperty Name="PRODUCTION_LINE_CD" ColumnName="PRODUCTION_LINE_CD" />
+                <ScalarProperty Name="GO_NO" ColumnName="GO_NO" />
+                <ScalarProperty Name="GARMENT_TYPE_CD" ColumnName="GARMENT_TYPE_CD" />
+                <ScalarProperty Name="GO_JO_NO" ColumnName="GO_JO_NO" />
+                <ScalarProperty Name="CUT_QTY" ColumnName="CUT_QTY" />
+                <ScalarProperty Name="ACTUAL_QTY" ColumnName="ACTUAL_QTY" />
+                <ScalarProperty Name="GOOD_GARMENT_QTY" ColumnName="GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="REWORKED_GOOD_GARMENT_QTY" ColumnName="REWORKED_GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="WORKMANSHIP_DEFECT_QTY" ColumnName="WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="INSPECT_QTY" ColumnName="INSPECT_QTY" />
+                <ScalarProperty Name="NON_WORKMANSHIP_DEFECT_QTY" ColumnName="NON_WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="PASS_RATES" ColumnName="PASS_RATES" />
+                <ScalarProperty Name="SAH" ColumnName="SAH" />
+                <ScalarProperty Name="LAST_MODIFY_DATE" ColumnName="LAST_MODIFY_DATE" />
+                <ScalarProperty Name="Create_Time" ColumnName="Create_Time" />
+                <ScalarProperty Name="fromtime" ColumnName="fromtime" />
+                <ScalarProperty Name="totime" ColumnName="totime" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="TIME_INTERVAL" ColumnName="TIME_INTERVAL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_FACTORY" FunctionImportName="FN_DASHBOARD_FACTORY">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_FACTORY_Result">
+                <ScalarProperty Name="FACTORY_ID" ColumnName="FACTORY_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_GARMENT_TYPE" FunctionImportName="FN_DASHBOARD_GARMENT_TYPE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_GARMENT_TYPE_Result">
+                <ScalarProperty Name="GARMENT_TYPE" ColumnName="GARMENT_TYPE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_LINE" FunctionImportName="FN_DASHBOARD_LINE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_LINE_Result">
+                <ScalarProperty Name="PRODUCTION_LINE_CD" ColumnName="PRODUCTION_LINE_CD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_LINE_ACTUAL_HEAD_COUNT" FunctionImportName="FN_DASHBOARD_LINE_ACTUAL_HEAD_COUNT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_LINE_ACTUAL_HEAD_COUNT_Result">
+                <ScalarProperty Name="FACTORY_CD" ColumnName="FACTORY_CD" />
+                <ScalarProperty Name="PRODUCTION_LINE_CD" ColumnName="PRODUCTION_LINE_CD" />
+                <ScalarProperty Name="EMPLOYEE_ID" ColumnName="EMPLOYEE_ID" />
+                <ScalarProperty Name="RATIO" ColumnName="RATIO" />
+                <ScalarProperty Name="ACTAUL_LINE_CD" ColumnName="ACTAUL_LINE_CD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_LINE_RATIO" FunctionImportName="FN_DASHBOARD_LINE_RATIO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_LINE_RATIO_Result">
+                <ScalarProperty Name="FACTORY_CD" ColumnName="FACTORY_CD" />
+                <ScalarProperty Name="PRODUCTION_LINE_CD" ColumnName="PRODUCTION_LINE_CD" />
+                <ScalarProperty Name="RATIO" ColumnName="RATIO" />
+                <ScalarProperty Name="ACTAUL_LINE_CD" ColumnName="ACTAUL_LINE_CD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_PREVIOUS_SHIFT_DATE" FunctionImportName="FN_DASHBOARD_PREVIOUS_SHIFT_DATE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_PREVIOUS_SHIFT_DATE_Result">
+                <ScalarProperty Name="TRX_DATE" ColumnName="TRX_DATE" />
+                <ScalarProperty Name="SHIFT_CD" ColumnName="SHIFT_CD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_PRODUCTION_QTY_BY_SHIFT_LINE" FunctionImportName="FN_DASHBOARD_PRODUCTION_QTY_BY_SHIFT_LINE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_PRODUCTION_QTY_BY_SHIFT_LINE_Result">
+                <ScalarProperty Name="FROM_TIME" ColumnName="FROM_TIME" />
+                <ScalarProperty Name="TO_TIME" ColumnName="TO_TIME" />
+                <ScalarProperty Name="ACTUAL_QTY" ColumnName="ACTUAL_QTY" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_SHIFT_TIME_SCHEDULE" FunctionImportName="FN_DASHBOARD_SHIFT_TIME_SCHEDULE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_SHIFT_TIME_SCHEDULE_Result">
+                <ScalarProperty Name="fromtime" ColumnName="fromtime" />
+                <ScalarProperty Name="totime" ColumnName="totime" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="TIME_INTERVAL" ColumnName="TIME_INTERVAL" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_SHOW" FunctionImportName="FN_DASHBOARD_SHOW">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_SHOW_Result">
+                <ScalarProperty Name="factory_cd" ColumnName="factory_cd" />
+                <ScalarProperty Name="line" ColumnName="line" />
+                <ScalarProperty Name="trsdate" ColumnName="trsdate" />
+                <ScalarProperty Name="shift_cd" ColumnName="shift_cd" />
+                <ScalarProperty Name="HeadCount" ColumnName="HeadCount" />
+                <ScalarProperty Name="GONO" ColumnName="GONO" />
+                <ScalarProperty Name="SAH" ColumnName="SAH" />
+                <ScalarProperty Name="ACTUAL_QTY" ColumnName="ACTUAL_QTY" />
+                <ScalarProperty Name="GOOD_GARMENT_QTY" ColumnName="GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="WORKMANSHIP_DEFECT_QTY" ColumnName="WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="INSPECT_QTY" ColumnName="INSPECT_QTY" />
+                <ScalarProperty Name="Target_QTY" ColumnName="Target_QTY" />
+                <ScalarProperty Name="Eff" ColumnName="Eff" />
+                <ScalarProperty Name="Fpy" ColumnName="Fpy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_SHOW_DATA" FunctionImportName="FN_DASHBOARD_SHOW_DATA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_SHOW_DATA_Result">
+                <ScalarProperty Name="factory_cd" ColumnName="factory_cd" />
+                <ScalarProperty Name="line" ColumnName="line" />
+                <ScalarProperty Name="trsdate" ColumnName="trsdate" />
+                <ScalarProperty Name="shift_cd" ColumnName="shift_cd" />
+                <ScalarProperty Name="HeadCount" ColumnName="HeadCount" />
+                <ScalarProperty Name="GONO" ColumnName="GONO" />
+                <ScalarProperty Name="SAH" ColumnName="SAH" />
+                <ScalarProperty Name="ACTUAL_QTY" ColumnName="ACTUAL_QTY" />
+                <ScalarProperty Name="GOOD_GARMENT_QTY" ColumnName="GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="WORKMANSHIP_DEFECT_QTY" ColumnName="WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="INSPECT_QTY" ColumnName="INSPECT_QTY" />
+                <ScalarProperty Name="Target_QTY" ColumnName="Target_QTY" />
+                <ScalarProperty Name="Eff" ColumnName="Eff" />
+                <ScalarProperty Name="Fpy" ColumnName="Fpy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_SHOW_PREVIOUS_DATA" FunctionImportName="FN_DASHBOARD_SHOW_PREVIOUS_DATA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_SHOW_PREVIOUS_DATA_Result">
+                <ScalarProperty Name="factory_cd" ColumnName="factory_cd" />
+                <ScalarProperty Name="line" ColumnName="line" />
+                <ScalarProperty Name="trsdate" ColumnName="trsdate" />
+                <ScalarProperty Name="shift_cd" ColumnName="shift_cd" />
+                <ScalarProperty Name="HeadCount" ColumnName="HeadCount" />
+                <ScalarProperty Name="GONO" ColumnName="GONO" />
+                <ScalarProperty Name="SAH" ColumnName="SAH" />
+                <ScalarProperty Name="ACTUAL_QTY" ColumnName="ACTUAL_QTY" />
+                <ScalarProperty Name="GOOD_GARMENT_QTY" ColumnName="GOOD_GARMENT_QTY" />
+                <ScalarProperty Name="WORKMANSHIP_DEFECT_QTY" ColumnName="WORKMANSHIP_DEFECT_QTY" />
+                <ScalarProperty Name="INSPECT_QTY" ColumnName="INSPECT_QTY" />
+                <ScalarProperty Name="Target_QTY" ColumnName="Target_QTY" />
+                <ScalarProperty Name="Eff" ColumnName="Eff" />
+                <ScalarProperty Name="Fpy" ColumnName="Fpy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_TARGET_QTY" FunctionImportName="FN_DASHBOARD_TARGET_QTY">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_TARGET_QTY_Result">
+                <ScalarProperty Name="fromtime" ColumnName="fromtime" />
+                <ScalarProperty Name="totime" ColumnName="totime" />
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="GO_NO" ColumnName="GO_NO" />
+                <ScalarProperty Name="SAH" ColumnName="SAH" />
+                <ScalarProperty Name="LAST_MODIFY_DATE" ColumnName="LAST_MODIFY_DATE" />
+                <ScalarProperty Name="Target_QTY" ColumnName="Target_QTY" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="MESDBModel.Store.FN_DASHBOARD_TIME_INTERVAL_QTY" FunctionImportName="FN_DASHBOARD_TIME_INTERVAL_QTY">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MESDBModel.FN_DASHBOARD_TIME_INTERVAL_QTY_Result">
+                <ScalarProperty Name="TIME_PERIOD" ColumnName="TIME_PERIOD" />
+                <ScalarProperty Name="ACTUAL_QTY" ColumnName="ACTUAL_QTY" />
+                <ScalarProperty Name="SEQ" ColumnName="SEQ" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PROC_DASHBOARD_GET_EMPLOYEE_ATTENDTIME" FunctionName="MESDBModel.Store.PROC_DASHBOARD_GET_EMPLOYEE_ATTENDTIME" />
+          <FunctionImportMapping FunctionImportName="PROC_DASHBOARD_GET_PRODUCTION_QTY" FunctionName="MESDBModel.Store.PROC_DASHBOARD_GET_PRODUCTION_QTY" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

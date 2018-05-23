@@ -1,0 +1,126 @@
+﻿
+     html{
+       width:100%; 
+       height:100%;
+     }
+     body{
+       width:100%; 
+       height:100%;
+       position:fixed;
+     }
+     dialog{
+         padding-top:0;
+     }
+
+     #div_left{
+            width: 60%;
+            height: 99%;
+            float: left;
+            margin-left: 0px;
+            border: 0px solid #f00;
+        }
+
+     #div_right{
+            width: 40%;
+            height: 99%;
+            float: left;
+            border: 0px solid #f00;
+        }   
+      
+    ul{
+           font-size:12px;
+       }
+        
+     navigation {
+         width:100%; 
+         height:3%;
+     }
+     .esq_container1{
+         width:100%; 
+         height:100%;
+         /*display:table;*/
+     }
+     .tb_1 {
+       text-align:center;
+       width:100%; 
+       height:100%;
+     }
+
+     .tb_2 {
+       text-align:center;
+       width:80%; 
+       height:100%;
+       color:white; 
+     }
+
+     .tb_3 {
+       text-align:center;
+       width:80%; 
+       height:100%;
+       color:white; 
+     }
+
+     .td0 {
+         background-color:#020321;
+         height:5%;
+     }
+     label.L1{
+         color:#187d3c;
+         font-size:34px;
+     }
+     label.L2{
+         color:#ffff00;
+         font-size:34px;
+     }
+     label.L3{
+         color:#c8c8c9;
+         font-size:34px;
+     }
+     label.L4{
+         font-size:50px;
+     }
+     label.L5{
+         color:#ffff00;
+         font-size:110px;
+     }
+     .td_c0
+     {
+         font-size:24px;
+         font-weight:bold;
+         color:#c8c8c9;
+     }
+     .td_c1
+     {
+         font-size:24px;
+         color:#ffff00;
+     }
+     .td_c2
+     {
+         font-size:30px;
+         font-weight:bold;
+         color:#c8c8c9;
+     }
+     li{
+         color:blue;
+         font-size:18px;
+     }
+     .row
+        {
+            width:100%;
+            height: 100%;
+        }
+      .col-xs-2
+        {
+            width:7%;
+            height: 100%;
+            float: left;
+        }
+      .col-xs-10
+        {
+            width:93%;
+            height: 100%;
+            float: right;
+        }
+        .k-widget k-window{
+            padding-top:0
+        }

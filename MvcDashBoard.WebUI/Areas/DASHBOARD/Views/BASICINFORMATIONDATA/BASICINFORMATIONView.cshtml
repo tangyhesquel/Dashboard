@@ -1,0 +1,470 @@
+﻿@using System.Web.Helpers;
+
+@model MvcDashBoard.Model.DASHBOARD.Models.BASICINFORMATION_DATA
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <link href="~/Scripts/common/esquel.default.style.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.common-esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.esquel.min.css" rel="stylesheet" />
+    @*<link href="~/Scripts/common/kendo.esquel.mobile.min - 修改PC.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.esquel.mobile.min.css" rel="stylesheet" />*@
+
+    <link href="~/Scripts/common/COMMON.css" rel="stylesheet" />
+    <script src="~/Scripts/common/COMMON.js"></script>
+    <script src="~/Scripts/common/BASICINFORMATION.js?1.1"></script>
+
+
+    @*<link href="~/Scripts/KendoUI/styles/kendo.default.min.css" rel="stylesheet" />
+        <link href="~/Scripts/KendoUI/styles/kendo.common.min.css" rel="stylesheet" />*@
+    <script src="~/Scripts/KendoUI/js/jquery.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/jszip.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.web.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.all.min.js"></script>
+
+    <title>BASIC INFORMATION</title>
+    <style>
+        th {
+            color: #32364c;
+        }
+
+        table {
+            height: 100%;
+            width: 100%;
+            /*background-color:rgb(152,33,53);*/
+        }
+
+        input {
+            font: 100;
+            font-style: normal;
+            background: blue;
+        }
+
+        label {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            height: 60%;
+            width: 60%;
+            margin: 100px;
+            font-family: Segoe UI;
+            content: normal;
+            font-family: Segoe UI;
+            font-size: 14.4px;
+            margin-bottom: 100px;
+            margin-left: 100px;
+            margin-right: 100px;
+            margin-top: 50px;
+            position: static;
+            z-index: auto;
+            align-self: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div data-role="esq_navbar">
+
+        <table align="center" border="0">
+            <tr style="height:30%">
+                <th colspan="4" align="center">
+                    <span id="SPAN1" style="font-size:24px;color:blue">@ViewData["SPN_SPAN1"]</span> @*基本信息设置-Basic Information Entry*@
+                    <p></p><p></p>
+                </th>
+            </tr>
+            <tr>
+                <td><label id="LBL_FACTORY_CD">@ViewData["LBL_FACTORY_CD"]</label></td> @*工厂-FACTORY CODE*@
+                <td><input style="width:auto" id="FACTORY_CD" /></td>
+                <td><label id="LBL_GARMENT_TYPE">@ViewData["LBL_GARMENT_TYPE"]</label></td> @*成衣类型-GARMENT TYPE*@
+                <td><input id="GARMENT_TYPE" /></td>
+            </tr>
+            <tr>
+                <td><label id="LBL_LINE_CODE1" style="display:none">@ViewData["LBL_LINE_CODE1"]</label></td>@*组别1-LINE 1*@  
+                <td><input id="LINE_CODE1" type="hidden" /></td> 
+                <td><label id="LBL_SHIFT_CODE1">@ViewData["LBL_SHIFT_CODE1"]</label></td>@*班次1-SHIFT 1*@
+                <td><input id="SHIFT_CODE1" /></td>
+            </tr>
+            <tr>
+                <td><label id="LBL_LINE_CODE2" style="display:none">@ViewData["LBL_LINE_CODE2"]</label></td>@*组别2-LINE2*@
+                <td><input id="LINE_CODE2" type="hidden" /></td>
+                <td><label id="LBL_SHIFT_CODE2">@ViewData["LBL_SHIFT_CODE2"]</label></td>@*班次2-SHIFT2*@
+                <td><input id="SHIFT_CODE2" /></td>
+            </tr>
+            <tr>
+                <td><label id="LBL_TARGET_TOTAL_QTY">@ViewData["LBL_TARGET_TOTAL_QTY"]</label></td>@*目标总产量*@
+                <td><input id="TARGET_TOTAL_QTY" /></td>
+                <td><label id="LBL_TARGET_WORK_HOUR">@ViewData["LBL_TARGET_WORK_HOUR"]</label></td>@*总出勤时间*@
+                <td><input id="TARGET_WORK_HOUR" /></td>
+                
+            </tr>
+            <tr>
+                <td><label id="LBL_REFRESH_INTERVAL">@ViewData["LBL_REFRESH_INTERVAL"]</label></td>@*刷新时间-REFRESH TIME*@
+                <td><input id="REFRESH_INTERVAL" /></td>
+                <td><label id="LBL_LANGUAGE">@ViewData["LBL_LANGUAGE"]</label></td>@*版本*@
+                <td><input id="LANGUAGE" /></td>
+            </tr>
+            <tr>
+
+                <td><label id="LBL_HR_REFRESH_INTERVAL">@ViewData["LBL_HR_REFRESH_INTERVAL"]</label></td>@*刷新时间-REFRESH TIME*@
+                <td><input id="HR_REFRESH_INTERVAL" /></td>
+                <td><label id="LBL_HR_MAX_TIME_DIFFERENCE">@ViewData["LBL_HR_MAX_TIME_DIFFERENCE"]</label></td>@*版本*@
+                <td><input id="HR_MAX_TIME_DIFFERENCE" /></td>
+            </tr>
+            <tr>
+
+                <td><label id="LBL_DISPLAY_TARGET2_DEFECT">@ViewData["LBL_DISPLAY_TARGET2_DEFECT"]</label></td>@*刷新时间-REFRESH TIME*@
+                <td><input id="DISPLAY_TARGET2_DEFECT" /></td>
+                <td><label id="LBL_USE_LINE_TARGET2">@ViewData["LBL_USE_LINE_TARGET2"]</label></td>@*刷新时间-REFRESH TIME*@
+                <td><input id="USE_LINE_TARGET2" /></td>
+            </tr>
+            <tr><td colspan="4">         </td></tr>
+            <tr><td colspan="4">         </td></tr>
+            <tr onabort="1">
+                <td colspan="4"><p></p><span style="font-size:16px;color:blue"><label id="LBL_SPECIALSETTING">@ViewData["LBL_SPECIALSETTING"]</label></span><p></p></td>      @*特别设置-SPECIAL SETTING*@
+            </tr>
+            <tr onabort="1">
+                <td colspan="1"><label id="LBL_LINE_CODE3">@ViewData["LBL_LINE_CODE3"]</label></td>@*组别-LINE*@
+                <td colspan="1"><input id="LINE_CODE3" /></td>
+                @*<td colspan="2" align="center"><button id="returnbutton" onclick="ReturnToMain()" style="color:blue">返回</button></td>*@
+                @*<td colspan="2" align="center"><a href="javascript:window.location.href=''+Go_DashBoardShow();">返回</a></td>*@
+
+                <td colspan="2" align="center" style="font-size:24px" hidden="hidden">@Html.ActionLink("返回主页面-RETURN", "DASHBOARDSHOWView", "DASHBOARDSHOWDATA", new { }, new { target = "_self" })</td>
+
+            </tr>
+            <tr onabort="1">
+                <td colspan="1"><label id="LBL_SHIFT_CODE3">@ViewData["LBL_SHIFT_CODE3"]</label></td>@*班次-SHIFT*@
+                <td colspan="1"><input id="SHIFT_CODE3" /></td>
+                <td colspan="2" align="center"><button id="savebutton" onclick="SaveDataToFile()" style="color:blue">@ViewData["BTN_SAVE"]</button></td>@*保存*@
+            </tr>
+            <tr onabort="1">
+                <td colspan="1"><label id="LBL_SHOWED_DATE3">@ViewData["LBL_SHOWED_DATE3"]</label></td>@*日期-DATE*@
+                <td colspan="1"><input id="SHOWED_DATE3" /></td>
+                <td colspan="2" align="center"><button id="closebutton" onclick="window.opener=null;window.close();" style="color:blue">@ViewData["BTN_CLOSE"]</button></td>
+            </tr>
+            <tr>
+        </table>
+    </div>
+
+    <div id="loading"></div>
+    <span id="notification" style="display:none;"></span>
+
+    <div id="example" class="k-content">
+        <script id="errorTemplate" type="text/x-kendo-template">
+            <div class="wrong-pass">
+                <h3>#= title #</h3>
+                <p>#= message #</p>
+            </div>
+        </script>
+        <script id="successTemplate" type="text/x-kendo-template">
+            <div class="upload-success">
+                <h3>#= message #</h3>
+            </div>
+        </script>
+
+    </div>
+
+    <script>
+    var notification;
+    var GARMENT_TYPE_dataSource = @Html.Raw(Json.Encode(ViewData["GARMENT_TYPE"]));
+    var FACTORY_CD_dataSource = @Html.Raw(Json.Encode(ViewData["FACTORY_CD"]));
+    var LINE_CD_dataSource =@Html.Raw(Json.Encode(ViewData["LINE_CD"]));
+    var SHIFT_CODE_dataSource =@Html.Raw(Json.Encode(ViewData["SHIFT_CODE"]));
+    //alert(JSON.stringify(SHIFT_CODE_dataSource));
+    $("#FACTORY_CD").kendoComboBox({
+        dataSource: FACTORY_CD_dataSource,
+        dataTextField: "FACTORY_CD",
+        dataValueField: "FACTORY_CD",
+        suggest: true,
+        value: "@Html.DisplayFor(model => model.FACTORY_CD)"
+    });
+
+    $("#GARMENT_TYPE").kendoDropDownList({
+        dataSource: GARMENT_TYPE_dataSource,
+        dataTextField: "GARMENT_TYPE",
+        dataValueField: "GARMENT_TYPE",
+        suggest: true,
+        value: "@Html.DisplayFor(model => model.GARMENT_TYPE)"
+    });
+
+    $("#REFRESH_INTERVAL").kendoNumericTextBox({
+        value: "@Html.DisplayFor(model => model.REFRESH_INTERVAL)"
+    });
+
+    @*$("#LINE_CODE1").kendoComboBox({
+        dataSource: LINE_CD_dataSource,
+        dataTextField: "PRODUCTION_LINE_CD",
+        dataValueField: "PRODUCTION_LINE_CD",
+        suggest: true,
+        optionLabel: " ",
+        value: "@Html.DisplayFor(model => model.LINE_CODE1)"
+    });*@
+
+    @*$("#LINE_CODE2").kendoComboBox({
+        dataSource: LINE_CD_dataSource,
+        dataTextField: "PRODUCTION_LINE_CD",
+        dataValueField: "PRODUCTION_LINE_CD",
+        suggest: true,
+        optionLabel: " ",
+        value: "@Html.DisplayFor(model => model.LINE_CODE2)"
+    });*@
+
+    $("#SHIFT_CODE1").kendoDropDownList({
+        dataSource: SHIFT_CODE_dataSource,
+        dataTextField: "SHIFT_CODE",
+        dataValueField: "SHIFT_CODE",
+        suggest: true,
+        optionLabel: " ",
+        value: "@Html.DisplayFor(model => model.SHIFT_CODE1)"
+    });
+
+    $("#SHIFT_CODE2").kendoDropDownList({
+        dataSource: SHIFT_CODE_dataSource,
+        dataTextField: "SHIFT_CODE",
+        dataValueField: "SHIFT_CODE",
+        suggest: true,
+        optionLabel: " ",
+        value: "@Html.DisplayFor(model => model.SHIFT_CODE2)"
+    });
+
+    $("#HR_MAX_TIME_DIFFERENCE").kendoNumericTextBox({
+        value: "@Html.DisplayFor(model => model.HR_MAX_TIME_DIFFERENCE)",
+        max:12,
+        min:1,
+        step:1
+
+    });
+
+    $("#HR_REFRESH_INTERVAL").kendoNumericTextBox({
+        value: "@Html.DisplayFor(model => model.HR_REFRESH_INTERVAL)",
+        max:300,
+        min:10,
+        step:10
+    });
+
+
+    $("#LINE_CODE3").kendoComboBox({
+        dataSource: LINE_CD_dataSource,
+        dataTextField: "PRODUCTION_LINE_CD",
+        dataValueField: "PRODUCTION_LINE_CD",
+        suggest: true,
+        value: "@Html.DisplayFor(model => model.LINE_CODE3)"
+    });
+
+    $("#SHIFT_CODE3").kendoComboBox({
+        dataSource: SHIFT_CODE_dataSource,
+        dataTextField: "SHIFT_CODE",
+        dataValueField: "SHIFT_CODE",
+        suggest: true,
+        value: "@Html.DisplayFor(model => model.SHIFT_CODE3)"
+    });
+
+    $("#SHOWED_DATE3").kendoDatePicker({
+        value: "@Html.DisplayFor(model => model.SHOWED_DATE3)",
+        format: "{0:yyyy-MM-dd}"
+    });
+
+    $("#LANGUAGE").kendoDropDownList({
+        dataSource: [
+            {text:'English',value:'EN'},
+            {text:'中文',value:'CN'},
+            {text:'Viet Nam',value:'VN'}
+        ],
+        dataTextField: "text",
+        dataValueField: "value",
+        suggest: true,
+        value: "@Html.DisplayFor(model => model.LANGUAGE)"
+    });
+
+    $("#TARGET_TOTAL_QTY").kendoNumericTextBox({
+        value: "@Html.DisplayFor(model => model.TARGET_TOTAL_QTY)",
+            //min:0,
+            step:10
+        });
+
+    $("#TARGET_WORK_HOUR").kendoNumericTextBox({
+            value: "@Html.DisplayFor(model => model.TARGET_WORK_HOUR)",
+            min:1,
+            step:0.5
+        });
+
+    $("#DISPLAY_TARGET2_DEFECT").kendoDropDownList({
+            dataSource: [
+                {text:'YES',value:'Y'},
+                {text:'NO',value:'N'}                
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            suggest: true,
+            value: "@Html.DisplayFor(model => model.DISPLAY_TARGET2_DEFECT)"
+    });
+
+    $("#USE_LINE_TARGET2").kendoDropDownList({
+            dataSource: [
+                {text:'YES',value:'Y'},
+                {text:'NO',value:'N'}                
+            ],
+            dataTextField: "text",
+            dataValueField: "value",
+            suggest: true,
+            value: "@Html.DisplayFor(model => model.USE_LINE_TARGET2)"
+        });
+
+        $("#savebutton").kendoButton();
+        $("#closebutton").kendoButton();
+        $("#returnbutton").kendoButton();
+        NotificationInit();
+
+
+
+        function SaveDataToFile() {
+            var s;
+            s=CheckBeforeSave();
+            if (s != "") {
+                alert(s);
+                //s="MSG_"+s;
+                if (s=="CK1") {
+                    alert("@ViewData["MSG_CK1"]");
+                return;
+            }
+            if (s=="CK2") {
+                alert("@ViewData["MSG_CK2"]");
+                return;
+            }
+            if (s=="CK3") {
+                alert("@ViewData["MSG_CK3"]");
+                return;
+            }
+            if (s=="CK4") {
+                alert("@ViewData["MSG_CK4"]");
+                return;
+            }
+            if (s=="CK5") {
+                alert("@ViewData["MSG_CK5"]");
+                return;
+            }
+            if (s=="CK6") {
+                alert("@ViewData["MSG_CK6"]");
+                return;
+            }
+            if (s=="CK7") {
+                alert("@ViewData["MSG_CK7"]");
+                return;
+            }
+            if (s=="CK8") {
+                alert("@ViewData["MSG_CK8"]");
+                return;
+            }
+            if (s=="CK9") {
+                alert("@ViewData["MSG_CK9"]");
+                return;
+            }
+            if (s=="CK10") {
+                alert("@ViewData["MSG_CK10"]");
+                return;
+            }
+            if (s=="CK11") {
+                alert("@ViewData["MSG_CK11"]");
+                return;
+            }
+            if (s=="CK12") {
+                alert("@ViewData["MSG_CK12"]");
+                return;
+            }
+
+        }
+        kendo.ui.progress($("#loading"), true);
+        $.ajax({
+            async: false,
+            dataType: 'json',
+            type: 'POST',
+            url: '../../DASHBOARD/BASICINFORMATIONDATA/BasicDataSave',
+            data: {
+                FACTORY_CD: $('#FACTORY_CD').val(),
+                GARMENT_TYPE: $('#GARMENT_TYPE').val(),
+                REFRESH_INTERVAL: $('#REFRESH_INTERVAL').val(),
+                LINE_CODE1: $('#LINE_CODE1').val(),
+                SHIFT_CODE1: $('#SHIFT_CODE1').val(),
+                LINE_CODE2: $('#LINE_CODE2').val(),
+                SHIFT_CODE2: $('#SHIFT_CODE2').val(),
+                LINE_CODE3: $('#LINE_CODE3').val(),
+                SHIFT_CODE3: $('#SHIFT_CODE3').val(),
+                SHOWED_DATE3: $('#SHOWED_DATE3').val(),
+                LANGUAGE: $('#LANGUAGE').val(),
+                HR_MAX_TIME_DIFFERENCE: $('#HR_MAX_TIME_DIFFERENCE').val(),
+                HR_REFRESH_INTERVAL: $('#HR_REFRESH_INTERVAL').val(),
+                TARGET_TOTAL_QTY:$('#TARGET_TOTAL_QTY').val(),
+                TARGET_WORK_HOUR:$('#TARGET_WORK_HOUR').val(),
+                DISPLAY_TARGET2_DEFECT:$('#DISPLAY_TARGET2_DEFECT').val(),
+                USE_LINE_TARGET2:$('#USE_LINE_TARGET2').val()
+
+            },
+            success: function (data) {
+                if (data.SUCCESS == true) {
+                    notification.show({
+                        title:"@ViewData["MSG_SAVE_OK_T"]",
+                        message:"@ViewData["MSG_SAVE_OK"]" //message: "保存成功!\n\r SAVE SUCCESSFULLY!"
+                    }, "upload-success");
+                }
+                else {
+                    notification.show({
+                        title:"@ViewData["MSG_SAVE_FAILD_T"]",  //title: "错误-ERROR:",
+                        message:"@ViewData["MSG_SAVE_FAILED"]"+":0010" //message: "错误代码-ERROR CODE:0010"
+                    }, "error");
+                }
+                kendo.ui.progress($("#loading"), false);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                notification.show({
+                    title:"@ViewData["MSG_SAVE_FAILD_T"]", //title: "错误-ERROR:",
+                    message:"@ViewData["MSG_SAVE_FAILED"]"+":0011-" + XMLHttpRequest.status //message: "错误代码-ERROR CODE:0011-" + XMLHttpRequest.status
+                }, "error");
+                kendo.ui.progress($("#loading"), false);
+            }
+        });
+    }
+
+
+    @*var factorycd = "@Html.DisplayFor(model=> model.FACTORY_CD)";
+    var linecode1 = "@Html.DisplayFor(model => model.LINE_CODE1)";
+    var linecode2 = "@Html.DisplayFor(model => model.LINE_CODE2)";
+    var linecode3 = "@Html.DisplayFor(model => model.LINE_CODE3)";
+
+    var shiftcode1 = "@Html.DisplayFor(model => model.SHIFT_CODE1)";
+    var shiftcode2 = "@Html.DisplayFor(model => model.SHIFT_CODE2)";
+    var shiftcode3 = "@Html.DisplayFor(model => model.SHIFT_CODE3)";
+    var showeddate3 = "@Html.DisplayFor(model => model.SHOWED_DATE3)";*@
+
+    //    function Go_DashBoardShow() {
+    //        var factorycd;
+    //        var linecode;
+    //        var shiftcode;
+    //        var trxdate;
+    //    var s = "";
+    //    s = s + "../DASHBOARD_SHOW_DATA//DASHBOARDSHOWView?";
+    //    s = s + "FACTORY_CD =" + factorycd;
+    //    s = s + "&LINE_CODE = " + linecode;
+    //    s = s + "&SHIFT_CODE = " + shiftcode;
+    //    s = s + "&TRX_DATE = " + trxdate;
+    //    s = s + " target='_blank'";
+    //    //openwin(s);
+    //    return s;
+    //}
+
+    </script>
+</body>
+
+</html>

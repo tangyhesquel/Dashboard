@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>DASHBOARD HELP </title>
+
+    <link href="Scripts/common/esquel.default.style.css" rel="stylesheet" />
+    <link href="Scripts/common/kendo.esquel.min.css" rel="stylesheet" />
+<style>
+    ul{
+           font-size:20px;           
+       }
+    li{
+        font-size:16px;
+      }
+</style>
+</head>
+
+<body>
+    <div class="jumbotron" style="height:3%">
+        <h3 style="text-align:center">DASHBOARD HELP INFORMATION</h3>
+    </div>
+    <div data-role="esq_navbar">
+        <ul>
+            <li>菜单说明（暂时只有中文说明）：</li>
+            <li></li>
+            <li></li>
+
+            <li>1.【看板信息】:显示版面信息</li>
+            <li>1.1 页面地址参考 http://192.168.27.80:6060/DASHBOARD/DASHBOARDSHOWDATA/DASHBOARDSHOWView?factory=GEG&line=K03 </li>
+            <li>1.2 页面地址说明:?后面内容为参数"工厂代码"和"组别代码"</li>
+            <li>1.3 人头数，根据考勤信息个MES 员工组别信息判断，如果有误，可在【人头调整】菜单调整</li>
+            <li>1.4 实际人头数,人事资料中该Line所有员工</li>
+            <li>1.5 时间：当前时间</li>
+            <li>1.6 GO NO：最后一次刷新时的GO No。</li>
+            <li>1.7 SAH:GO NO.对应的SAH</li>
+            <li>1.8 实际产量/正品/疵品/FPY 根据GQS数据来的</li>
+            <li>1.9 目标产量1:根据GO SAH算的实际目标; 目标产量2:在基本设置中设置,总的目标产量/总的工作时间</li>
+            <li>1.10 效率:实际产量/目标产量1</li>
+            <li>1.11 LAST SHIFT DATA/上一班次数据 根据上一个班次的数据计算</li>
+            <li>1.12 右边时段/产量为每个时间段的数据,如果基本设置要求显示目标产量2和疵品，可显示这2个字段</li>
+            <li></li>
+
+            <li>2.【考勤调整】;用于人手调整用户刷卡有误的信息或者由系统判断错误的人头信息</li>
+            <li>   可以修改班次、上班日期，组别</li>
+            <li></li>
+            <li></li>
+
+            <li>3.【基本设置】:对本机取数做设置</li>
+            <li>3.1 可以设置2个组别和班次，不能是同样的组别和班次</li>
+            <li>3.2 刷新频率,看板页面刷新的时间间隔，刷新时会去系统取GQS产量</li>
+            <li>3.3 考勤刷新频率，每隔多长时间自动取HRIS考勤数据</li>
+            <li>3.4 考勤取数最大时间段，建议不要取太大,每次取1-2个小时数据，每次系统会记录取数时间段，下次取数时从上一次取数末开始</li>
+            <li>3.5 特殊设置:如果有组别和班次日期数据保存,修改看板信息为这一天的数据(当然，根据看板数据的存储时间来看,可看数据应该在一周内)</li>
+            <li>3.6 如果想回到看当前数据,修改组别和班次为空的保存。刷新看板信息页面即可</li>
+            <li>3.7 增加了总的目标产量/总的工作时间设置，增加了是否显示目标产量2和疵品</li>
+            <li>3.8 信息修改保存后，建议刷新主页面</li>
+            
+            <li></li>
+            <li></li>
+
+            <li>4.【获取考勤】</li>
+            <li>手动取考勤。考虑系统长时间没有使用，前期数据没取到，影响人头判断。</li>
+            <li>每次取考勤的最大时间段根据基本信息的【考勤取数最大时间段】来，建议1-2小时</li>
+            <li></li>
+            <li></li>
+
+            <li>5.【班次设置】</li>
+            <li>5.1 每个工厂可以设置多个班次</li>
+
+            <li>6. 其它说明</li>
+            <li>6.1 每次打开页面会取一次考勤，会取产量</li>
+            <li>6.2 会根据【基本设置】设置刷新时间刷新数据</li>
+            <li>6.3 会根据【基本设置】设置考勤刷新频率取HRIS考勤信息</li>
+            <li>6.4 如果长时间未取过考勤，下一次启动时取最近12小时的打卡记录来判断员工班次</li>
+            <li>6.5 分辨率设置为1024*768左右</li>
+
+        </ul>
+        </div>
+</body>
+</html>

@@ -1,0 +1,456 @@
+﻿.Tetil{
+      font-family:微软雅黑;
+      background-color:rgb(78,108,158);
+      height:50px;
+      line-height:50px;/*上下居中*/ 
+      text-indent:10px;/*段落首行缩进*/ 
+      font-size:36px;
+      color:white
+      }
+
+
+.logo {
+       background-image: url('images/logo.png');
+       background-color:#AE233A;
+       width: 2.6em;
+       min-width:2.6em
+       !important;  /*强制执行*/
+       background-size:contain;
+       background-repeat:no-repeat;
+       /*height: 3em;*/
+       float: left;
+       text-align: center;
+}
+
+.Menu{
+         font-family:微软雅黑; 
+         width:100%;   
+         height:40px;
+         /*float:left;*/
+         text-align:center;
+       /*background-color:#bb0a0a;*/
+         color:#fff;
+         background-color:#AE233A;
+         background: -ms-linear-gradient(top, #A6193A,  #A6193A);        /* IE 10 */
+         background:-moz-linear-gradient(top,#A6193A,#A6193A);/*火狐*/ 
+         background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#A6193A), to(#A6193A));/*谷歌*/ 
+         background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#A6193A), to(#A6193A));      /* Safari 4-5, Chrome 1-9*/
+         background: -webkit-linear-gradient(top, #A6193A, #A6193A);   /*Safari5.1 Chrome 10+*/
+         background: -o-linear-gradient(top, #A6193A, #A6193A);  /*Opera 11.10+*/
+      
+      }
+.Menu li {
+    height:30px;
+    min-width:100px;
+    }
+ .km-widget.km-buttongroup .km-button {
+    margin: 0;
+    border-width: 1px 0 1px 1px;
+    padding: .4em .1em .4em;
+}
+ .k-menu .k-item > .k-link {
+                display: block;
+                padding: .4em .8em .1em;
+                line-height: 1.34em;
+                -khtml-user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: -moz-none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+.Conditions {
+              font-family:微软雅黑;
+              height:140px;
+           
+              line-height:140px;/*上下居中*/ 
+              /*background-color:red;*/
+              /*position:fixed;
+              top:32px;
+              left:0px;*/        
+             }
+
+/*.Message{
+          width:12%;
+          float:left;
+          font-size:1em;
+          border:0px solid rgb(128, 128, 128);
+            background-color:rgb(91, 155, 213);
+         }*/
+
+
+.Info {
+              font-family:微软雅黑;
+              /*background-color:rgb(91, 155, 213);*/
+              color:#3b3b3b;
+              font-size:15px;
+              word-break:break-all;
+              list-style-type:none; /*去点圆点*/
+              /*display:inline-block;*/ 
+              margin:1px; 
+              padding:8px;
+              white-space:inherit; /*元素内的空白处理*/
+              overflow: hidden;  /*规定当内容溢出元素框时发生的事情*/
+              text-overflow:ellipsis;  /*  规定当文本溢出包含元素时发生的事情*/ 
+              width:initial;
+       }
+
+
+
+
+
+
+
+
+/*------------------------------排行榜样式-----------------------------------*/
+.RankTitle{
+                float:left;
+                font-family:微软雅黑;
+                width:100%;
+                font-size:30px;
+                color:#3b3b3b;
+                text-align:center;
+                background-color:#cfcfcf;
+                /*-moz-border-radius:10px;
+                -webkit-border-radius: 10px;*/
+          }
+
+.RankBox{
+         width:48.6%;
+         float:left;
+         /*background-color:#f3f3f4;*/
+         border:2px solid;
+         -moz-border-radius:10px;
+         -webkit-border-radius: 10px;
+         margin:2px;
+         }
+
+.RankTab{
+         width:100%;
+         float:left;
+         background-color:white;
+         -moz-border-radius:10px;
+         -webkit-border-radius: 10px;
+         overflow:hidden;
+         }
+
+.k-widget.k-block.k-inline-block.k-draghandle{
+                                                     border-bottom-style: solid;
+                                                     border-width: 0px;
+                                                     -webkit-appearance:none;
+                                                    }
+
+.k-tabstrip-items .k-state-default{
+                                      border-color: #ffffff;
+                                      width:49.7%;
+                                      text-align:center
+                                  }
+
+.k-tabstrip > .k-content, .k-panelbar .k-tabstrip > .k-content{
+                                                                margin:0;
+                                                                border-style:none;
+                                                                cursor:pointer;
+                                                               }
+
+/*.k-tabstrip-items .k-item{
+                            background-image:none,linear-gradient(to bottom,rgba(255,255,255,0) 0,rgba(255,255,255,.45) 100%);
+                            background-position:50% 50%;
+                            background-color:#BFBFC0;
+                         }*/
+.k-tabstrip-items{
+                    padding:0;
+                  }
+
+.k-tabstrip-items .k-item{
+                   
+
+
+
+}
+/*----------------------------------------------------
+                      Tab样式
+
+------------------------------------------------------*/
+
+ /*.k-item.k-state-default.k-last
+ {
+       background-color:#CBCBCB;
+  
+ }
+.k-item.k-state-default.k-first {
+          background-color:#CBCBCB;
+    }
+
+    #tabstrip .k-item.k-state-default
+    {
+        background-color:#CBCBCB;
+    }
+
+ .k-item.k-state-default.k-last.k-tab-on-top.k-state-active {    /*第一分页底色
+   background-color:#3f51b5;
+   color:#FFF;
+   
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+    }
+ .k-item.k-state-default.k-last.k-tab-on-top.k-state-active span{
+   background-color:transparent;
+   color:#FFF;
+    
+    }
+ .k-item.k-state-default.k-first.k-tab-on-top.k-state-active {
+    background-color:#3f51b5;
+    color:#FFF;
+    
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+    }
+.k-item.k-state-default.k-first.k-tab-on-top.k-state-active  span{
+          background-color:transparent;
+          color:#fff;
+     }
+
+ .k-item.k-state-default.k-tab-on-top.k-state-active {    /*第二分页底色
+    background-color:#3f51b5;
+    color:#FFF;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-top: 1px solid #fff;
+    
+    }
+ .k-item.k-state-default.k-tab-on-top.k-state-active span {
+             background-color:transparent;
+            color: #FFF;
+        }
+.k-loading.k-complete {
+        background-image:none;
+    }*/
+
+/*---------------模版样式----------------------*/
+
+
+.product10 {
+            float: left;
+            font-family:微软雅黑;
+            font-size:20px;
+            width:50%;
+            height:100%;
+            padding-top:1.5%;
+            /*padding-bottom:0.9%;*/
+            color:black;
+         }
+
+.product5 {
+            float: left;
+            font-family:微软雅黑;
+            font-size:23px;
+            width:60%;
+            height:100%;
+            padding-left:40%;
+            padding-top:1%;
+            /*padding-bottom:1%;*/
+            color:black;
+         }
+
+.product3 {
+            float: left;
+            font-family:微软雅黑;
+            font-size:40px;
+            width:70%;
+            height:100%;
+            padding-left:30%;
+            padding-top:1.4%;
+            /*padding-bottom:1%;*/
+            color:black;
+         }
+
+.template{
+              width:20%;
+              float:left;
+         }
+
+.k-state-selected{                        /*排行单击显示样式*/
+                  background-color:white;
+                  color:black;
+                 }
+
+/*------------------------------员工信息框体样式-----------------------------------*/
+.Default{
+              width:90%;
+              margin:0 auto;
+              height:90%;
+              font-family:微软雅黑;
+              font-size:3.6em;
+              color:#AE233A;
+              text-align:center;
+              vertical-align:middle;
+              -moz-border-radius:10px;
+              -webkit-border-radius: 10px;
+              border:0px solid;
+              font-weight:bold;
+              padding-top:18%;
+}
+
+/*------------------------------条件框体样式-----------------------------------*/
+.ConditionsItem{
+                 font-family:微软雅黑;
+                 margin-left:3%;
+                 font-size:30px;
+                 float:left;
+                 width:97%;
+                 margin-top:2%;
+}
+
+
+.ConditionsText{
+                 font-family:微软雅黑;
+                 font-size:20px;
+                 width:90%;
+                 float:left;
+
+}
+
+.ConditionsWord{
+                 font-family:微软雅黑;
+                 margin-left:3%;
+                 margin-right:3%;
+                 vertical-align:middle;
+                 font-size:30px;
+}
+
+.ButtonDiv{
+                  float:right;
+                  padding-bottom:3%;
+                  padding-top:10%;
+                  padding-right:50%;
+}
+
+.ButtonRight{
+                 width:30%;
+                 height:30%;
+                 margin-top:5%;
+                 margin-right:5%;
+                 float:right;
+                 -moz-border-radius:10px;
+                 -webkit-border-radius: 10px;
+                 
+}
+
+.ButtonLeft{
+                 width:30%;
+                 height:30%;
+                 margin-top:5%;
+                 margin-left:5%;
+                 float:left;
+                 -moz-border-radius:10px;
+                 -webkit-border-radius: 10px;
+}
+
+
+.ConditionsShow{
+                 height:80%;
+               }
+
+
+.ConditionsOpen{
+                height:19%;
+                border-top: 1px solid #177bba;
+               }
+
+
+
+
+/*.k-tabstrip-items {
+                             background-color:#A6A6B6
+
+                          }*/
+/*.TableText{
+            font-family:微软雅黑;
+            font-size:20px;
+            text-align:center;
+}*/
+/*.product
+            {
+                float: left;
+                width: 220px;
+                height: 110px;
+                margin: 0;
+                padding: 5px;
+                cursor: pointer;
+            }
+
+.k-pager-wrap
+            {
+                border-top: 0;
+            }
+
+.demo-section .k-listview:after
+            {
+                content: ".";
+                display: block;
+                height: 0;
+                clear: both;
+                visibility: hidden;
+            }*/
+
+
+.km-widget.km-buttongroup .km-button {
+border-width:0 0 0 1px;
+}
+
+.StatusMemo {
+color:black;
+margin:4px;
+font-size:1em;
+}
+.StatusMemo  p{
+
+margin:0px;
+font-size:1.2em;
+width:100%;
+text-indent:4px;
+color:#808080;
+height:32px;
+line-height:32px;
+border-bottom:1px solid #DFDFDF;
+
+}
+.StatusMemo ul
+{
+   text-align:left;
+   padding:4px;
+
+    
+}
+.StatusMemo li
+{
+    font-size:0.8em;
+    width:100%;
+    text-align:left;
+    font-family:'Segoe UI';
+    
+}
+.get_success{
+   color:#7c7c7c;   /*#DFDFDF;*/
+}
+.get_error{
+   color:#AD2B2B;
+}
+
+#alert {
+width:60px;
+height:60px;
+z-index:999999;
+/*background-color:#ff274e;*/
+position:absolute;
+top:8%;
+right:4%;
+background-image:url("images/alert.png");
+background-size:contain;
+display:none;
+cursor:pointer;
+}
+
+
+

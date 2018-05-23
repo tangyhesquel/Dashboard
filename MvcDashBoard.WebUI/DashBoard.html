@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+</head>
+<body>
+    <script text='javascript'>
+        var param = self.location.search.toString();
+        var ftyparam = param.split("&")[0];
+        var fty = ftyparam.split("=")[1].trim();
+        var website = "";
+        //document.location = 'h1ttp://192.168.7.166/GEG/Dashboard/DASHBOARD/DASHBOARDSHOWDATA/DASHBOARDSHOWView?factory=GEG&line=K20'
+      //DashBoard.html?factory=GEG&line=K20
+
+        switch(fty)
+        {
+            case "GEG":
+                website = 'http://192.168.7.166/GEG/Dashboard/DASHBOARD/DASHBOARDSHOWDATA/DASHBOARDSHOWView' + param;
+                break;
+            case "YMG":
+                website = 'http://192.168.7.166/GEG/Dashboard/DASHBOARD/DASHBOARDSHOWDATA/DASHBOARDSHOWView' + param;
+                break;
+            default:
+                website = 'http://192.168.7.166/GEG/Dashboard/DASHBOARD/DASHBOARDSHOWDATA/DASHBOARDSHOWView' + param;
+        }
+
+        //alert(website);
+        document.location = website;
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>DASHBOARDLINESHIFTSETTINGView</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+    <link href="~/Scripts/common/esquel.default.style.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.common-esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.esquel.mobile.min.css" rel="stylesheet" />
+
+    <link href="~/Scripts/common/COMMON.css" rel="stylesheet" />
+    <script src="~/Scripts/common/COMMON.js"></script>
+    <script src="~/Scripts/common/EMPLOYEE_ATTENDTIME.js"></script>
+
+    <script src="~/Scripts/KendoUI/js/jquery.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/jszip.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.web.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.all.min.js"></script>
+</head>
+
+<body data-spy="scroll" data-target="#myScrollspy">
+    <div class="jumbotron">
+        <table style="width:100%" border="0">
+            <tr style="width:100%">
+                <td width="30%"></td>
+                <td width="40%"><h3 style="text-align:center">@ViewData["SPN_SHIFT_INFORMATION"]</h3></td>
+                <td width="20%"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <table style="width:100%" border="0">
+            <tr style="width:100%">
+                <td width="4%"><label id="LBL_FACTORY_CD">@ViewData["LBL_FACTORY_CD"]</label></td>
+                <td width="12%"><input id="FACTORY_CD" /></td>
+                <td width="4%"><label id="LBL_SHIFT_CODE">@ViewData["LBL_SHIFT_CODE"]</label></td>
+                <td width="12%"><input id="SHIFT_CODE" /></td>
+                <td width="4%"><label id="LBL_SHIFT_DESC">@ViewData["LBL_SHIFT_DESC"]</label></td>
+                <td width="12%"><input class="k-textbox" id="SHIFT_DESC" /></td>
+                <td width="4%"></td>
+                <td><button id="inquirybutton" onclick="InquirySHIFTData()" style="color:blue">@ViewData["BTN_INQUIRY"]</button></td>@*查询-INQUIRY*@
+                <td><button id="closebutton" onclick="window.opener=null;window.close();" style="color:blue">@ViewData["BTN_CLOSE"]</button></td>@*关闭-CLOSE*@
+            </tr>
+        </table>
+    </div>
+
+    <script>
+    var notificationInit;
+    var changedrowdata1;
+    var FACTORY_CD_dataSource = @Html.Raw(Json.Encode(ViewData["FACTORY_CD_L"]));
+    var SHIFT_CODE_dataSource =@Html.Raw(Json.Encode(ViewData["SHIFT_CODE_L"]));
+    
+    $("#FACTORY_CD").kendoComboBox({
+        dataSource: FACTORY_CD_dataSource,
+        dataTextField: "FACTORY_CD",
+        dataValueField: "FACTORY_CD",
+        suggest: true,
+        value: @Html.Raw(Json.Encode(ViewData["FACTORY_CD"])),
+        })
+
+        $("#SHIFT_CODE").kendoComboBox({
+            dataSource: SHIFT_CODE_dataSource,
+            dataTextField: "SHIFT_CODE",
+            dataValueField: "SHIFT_CODE",
+            suggest: true,
+            value:@Html.Raw(Json.Encode(ViewData["SHIFT_CODE"])),
+        });
+
+        $("#inquirybutton").kendoButton();
+        $("#closebutton").kendoButton();
+
+</script>
+
+  <div>
+        <table style="width:100%">
+            <tr style="width:100%">
+                <td width="100%">
+                    <span>班次信息：</span>
+                    <div id="SHIFTLIST"></div>
+                </td>
+            </tr>
+        </table>
+  </div>
+
+    <div id="loading"></div>
+
+    <span id="notification" style="display:none;"></span>
+
+    <script id="errorTemplate" type="text/x-kendo-template">
+        <div class="wrong-pass">
+            <h3>#= title #</h3>
+            <p>#= message #</p>
+        </div>
+    </script>
+    <script id="successTemplate" type="text/x-kendo-template">
+        <div class="upload-success">
+            <h3>#= message #</h3>
+        </div>
+    </script>
+    <script id="toolbarSave" type="text/x-kendo-template" style="color:blue">
+        <a class="k-button" href="\#" onclick="Save()">保存</a>
+    </script>
+    <script id="toolbarAddLine" type="text/x-kendo-template" style="color:blue">
+        <a class="k-button" href="\#" onclick="AddDataInGrid()">新增行</a>
+    </script>
+
+    <script>
+    //全局变量
+    var notification;
+    var editable = false;
+    var DeleteFlag = "F";
+    var GriddataSource = null;
+    var SaveGridFlag = "F";
+
+    var ActiveDataSource=[
+        {text:"Enable",value:"Y"},
+        {text:"Disable",value:"N"}
+    ];
+
+    function ShiftListGridInit() {
+
+        $("#SHIFTLIST").kendoGrid({
+            pageable: false,
+            resizable: true,
+            scrollable: true,
+            culture: "zh-CN",
+            editable: true,
+            editable: {
+                createAt: "top"
+            },
+            selectable: true,
+            height: 800,
+            toolbar: [
+                        //{ name: "Inquiry", text: "查询" },
+                        //{ name: "create", text: "新增行" },
+                        //{ name: "save", text: "保存" },
+                        //{ template: kendo.template($("#toolbarInquiry").html()) },
+                        { template: kendo.template($("#toolbarAddLine").html()) },
+                        //{ template: kendo.template($("#toolbarSave").html()) },
+                        { name: "cancel", text: "取消" },
+                        { name: "excel", text: "导出EXCEL" }
+
+            ],
+            messages: {
+                commands: {
+                    cancel: "Cancel changes"
+                }
+            },
+
+            excel: {
+                allPages: true
+            },
+
+            columns: [
+                 {
+                     title: @Html.Raw(Json.Encode(ViewData["GRID_SEQNO"])),
+                     field: "SEQNO",
+                     width: 80,
+                     hidden:false
+                 },
+                 {
+                     title: @Html.Raw(Json.Encode(ViewData["GRID_FACTORY_CD"])),
+                     field: "FACTORY_CD",
+                     width: 80
+                 },
+                {
+                    title: @Html.Raw(Json.Encode(ViewData["GRID_SHIFT_CODE"])),
+                    field: "SHIFT_CODE",
+                    width: 60
+                },
+                {
+                    title: @Html.Raw(Json.Encode(ViewData["GRID_SHIFT_DESC"])),
+                    field: "SHIFT_DESC",
+                    width: 120
+                },
+                {
+                    title: @Html.Raw(Json.Encode(ViewData["GRID_SHIFT_SEQ"])),
+                    field: "SHIFT_SEQ",
+                    width: 80
+                },
+                {
+                    title: @Html.Raw(Json.Encode(ViewData["GRID_SHIFT_FROM"])),
+                    field: "SHIFT_FROM",
+                    format: "{0:HH:mm:ss}",
+                    width: 120
+                },
+                {
+                    title: @Html.Raw(Json.Encode(ViewData["GRID_SHIFT_TO"])),
+                    field: "SHIFT_TO",
+                    format: "{0:HH:mm:ss}",
+                    width: 120
+                },
+                {
+                    title: @Html.Raw(Json.Encode(ViewData["GRID_TIME_INTERVAL"])),
+                    field: "TIME_INTERVAL",
+                    width: 70
+                },
+                {
+                    title: @Html.Raw(Json.Encode(ViewData["GRID_ACTIVE"])),
+                    field: "ACTIVE",
+                    width: 100,
+                    editor:function(container,options)
+                    {
+                        var id;
+                        var desc;
+                        var input = $("<input/>");
+                        input.attr("name", options.field);
+                        //var input = $('<input name="' + options.field + '" required="required" />');
+                        input.appendTo(container);
+                        input.kendoDropDownList({
+                            dataTextField:"text",
+                            dataValueField:"value",
+                            value: id,
+                            dataSource:ActiveDataSource,
+                            filter: "contains",
+                            suggest: true,
+                            valuePrimitive: false,
+                            change: function(e) {
+                                id =this.value();
+                                desc=this.text();
+                                changedrowdata1.set("ACTIVE",id);
+                            }
+                        }).appendTo(container);;
+                    }
+                },
+                {
+                    width:150,
+                    title:@Html.Raw(Json.Encode(ViewData["GRID_OPERATION"])),//"操作",
+                    command: [
+                        {
+                            text: @Html.Raw(Json.Encode(ViewData["GRID_SAVE"])),//"保存-SAVE",
+                            click: function (e) {
+                                var tr = $(e.target).closest("tr"); // get the current table row (tr)
+                                var data = this.dataItem(tr);
+                                EditData(data.SEQNO,data.FACTORY_CD,data.SHIFT_CODE,data.SHIFT_DESC,data.SHIFT_SEQ,data.SHIFT_FROM,data.SHIFT_TO,data.TIME_INTERVAL,data.ACTIVE);
+                            }
+                        },
+                        {
+                            text:"删除", //@Html.Raw(Json.Encode(ViewData["GRID_SAVE"])),
+                            click: function (e) {
+                                var tr = $(e.target).closest("tr"); // get the current table row (tr)
+                                var data = this.dataItem(tr);
+                                DeleteSHIFTData(data.FACTORY_CD,data.SHIFT_CODE,data.SEQNO);
+                            }
+                        }
+                    ]
+                },
+                {
+                    edit: function (e) {
+                        changedrowdata1 = null;
+                        var selectedRows1 = this.select();
+                        changedrowdata1 = this.dataItem(selectedRows1[0]);
+                    }
+                }
+            ],
+        });
+    }
+
+    function DeleteSHIFTData(FACTORY_CD,SHIFT_CODE,SEQNO)
+    {
+        kendo.ui.progress($("#loading"), true);
+        $.ajax({
+            async: false,
+            dataType: 'json',
+            type: 'POST',
+            url: '../../DASHBOARD/DASHBOARDLINESHIFTSETTING/DeleteSHIFTData',
+            data: {
+                FACTORY_CD: FACTORY_CD,
+                SHIFT_CODE: SHIFT_CODE,
+                SEQNO:SEQNO
+            },
+            success: function (data) {
+                if (data.SUCCESS == true) {
+                    notification.show({
+                        title:"@ViewData["MSG_SAVE_OK_T"]",
+                        message:"@ViewData["MSG_SAVE_OK"]" //message: "保存成功!\n\r SAVE SUCCESSFULLY!"
+                    }, "upload-success");
+                    InquirySHIFTData();
+                    }
+                else
+                {
+                        notification.show({
+                         title:"@ViewData["MSG_SAVE_FAILED_T"]",  //title: "错误-ERROR:",
+                         message:"@ViewData["MSG_SAVE_FAILED"]"+":0043"  //message: "错误代码-ERROR CODE:0040"
+                        }, "error");
+                }
+          kendo.ui.progress($("#loading"), false);
+          },
+    error: function (XMLHttpRequest, textStatus, errorThrown) {
+        notification.show({
+            title:"@ViewData["MSG_SAVE_FAILED_T"]",  //title: "错误-ERROR:",
+            message:"@ViewData["MSG_SAVE_FAILED"]"+":0044"  //message: "错误代码-ERROR CODE:0040"
+        }, "error");
+        kendo.ui.progress($("#loading"), false);
+    }
+    });
+
+    }
+    function ClearFunction() {
+        $('#SHIFT_CODE').val("");
+        $('#FACTORY_CD').val("");
+    }
+
+    function AddDataInGrid() {
+        var grid = $("#SHIFTLIST").data("kendoGrid");
+
+        grid.dataSource.insert(0, {  FACTORY_CD: $('#FACTORY_CD').val(),SHIFT_CODE:$('#SHIFT_CODE').val(),SHIFT_DESC: $('#SHIFT_DESC').val(), SHIFT_SEQ: 0, TIME_INTERVAL:1,ACTIVE: "Y" });
+        //grid.dataSource.insert(0, {  FACTORY_CD: $('#FACTORY_CD').val(),SHIFT_CODE:$('#SHIFT_CODE').val(),SHIFT_DESC: $('#SHIFT_DESC').val(), SHIFT_SEQ: 0, SHIFT_FROM: "", SHIFT_TO:"",TIME_INTERVAL:1,ACTIVE: "Y" });
+        //grid.current(grid.dataSource.at(0));
+        //optional: focus the grid table
+        //grid.table.focus();
+        //grid.dataSource.add(req[K]); //然后grid会自动更新
+    }
+
+    //$(function () {
+    $(document).ready(function () {
+        buttoninit();
+    });
+
+    function InquirySHIFTData() {
+        kendo.ui.progress($("#loading"), true);
+        $.ajax({
+            async: false,
+            dataType: 'json',
+            type: 'POST',
+            url: '../../DASHBOARD/DASHBOARDLINESHIFTSETTING/InquirySHIFTData',
+            data: {
+                FACTORY_CD: $('#FACTORY_CD').val(),
+                SHIFT_CODE: $('#SHIFT_CODE').val()
+            },
+            success: function (data) {
+                if (data.SUCCESS == true) {
+                    RefreshGridData(data.Data);
+
+                    if (data.Data.length==0)
+                    {}
+                    else
+                    {
+                        $('#SHIFT_DESC').val(data.Data[0].SHIFT_DESC)
+                    }
+                    notification.show({
+                        title:"@ViewData["MSG_INQ_OK_T"]",
+                        message:"@ViewData["MSG_INQ_OK"]" //message: "保存成功!\n\r SAVE SUCCESSFULLY!"
+                    }, "upload-success");
+                }
+                else {
+                    notification.show({
+                        title:"@ViewData["MSG_INQ_FAILED_T"]",  //title: "错误-ERROR:",
+                        message:"@ViewData["MSG_INQ_FAILED"]"+":0040"  //message: "错误代码-ERROR CODE:0040"
+                    }, "error");
+                }
+                kendo.ui.progress($("#loading"), false);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                notification.show({
+                    title:"@ViewData["MSG_INQ_FAILED_T"]", //title: "错误-ERROR:",
+                    message:"@ViewData["MSG_INQ_FAILED"]"+":0041-" + XMLHttpRequest.status //message: "错误代码-ERROR CODE:0041-" + XMLHttpRequest.status
+                }, "error");
+                kendo.ui.progress($("#loading"), false);
+            }
+        });
+    }
+    function EditData(SEQNO,FACTORY_CD,SHIFT_CODE,SHIFT_DESC,SHIFT_SEQ,SHIFT_FROM,SHIFT_TO,TIME_INTERVAL,ACTIVE)
+    {
+
+        if (SEQNO==undefined)
+        {
+            SEQNO=0;
+        }
+        var SHIFT_FROM = getdate(SHIFT_FROM, 'H', 'hh:mm:ss','Y');
+        var SHIFT_TO = getdate(SHIFT_TO, 'H', 'hh:mm:ss','Y');
+
+        var flag='T'
+        if (SHIFT_CODE=='')
+        {
+
+            flag='F';
+        }
+
+        if (SHIFT_FROM=='')
+        {
+
+            flag='F';
+        }
+        if (SHIFT_TO=='')
+        {
+
+            flag='F';
+        }
+        if ((TIME_INTERVAL=='')||(TIME_INTERVAL=='0'))
+        {
+
+            flag='F';
+        }
+        if (flag=='F')
+        {
+            //alert("Please check this data!");
+            alert("@ViewData["MSG_CK1"]");
+            return;
+        }
+
+        //alert(FACTORY_CD);
+        //alert(SHIFT_CODE);
+        //alert(SHIFT_DESC);
+        //alert(SHIFT_FROM);
+        //alert(SHIFT_TO);
+        //alert(TIME_INTERVAL);
+
+        kendo.ui.progress($("#loading"), true);
+        $.ajax({
+            async: false,
+            dataType: 'json',
+            type: 'POST',
+            url: '../../DASHBOARD/DASHBOARDLINESHIFTSETTING/UpdateShiftData',
+            data: {
+                SEQNO:SEQNO,
+                FACTORY_CD:FACTORY_CD,
+                SHIFT_CODE:SHIFT_CODE,
+                SHIFT_DESC:SHIFT_DESC,
+                SHIFT_SEQ:SHIFT_SEQ,
+                SHIFT_FROM:SHIFT_FROM,
+                SHIFT_TO:SHIFT_TO,
+                TIME_INTERVAL:TIME_INTERVAL,
+                ACTIVE:ACTIVE
+            },
+            success: function (data) {
+                if (data.SUCCESS == true) {
+                    notification.show({
+                        title:"@ViewData["MSG_SAVE_OK_T"]",
+                        message:"@ViewData["MSG_SAVE_OK"]" //message: "保存成功!\n\r SAVE SUCCESSFULLY!"
+                    }, "upload-success");
+                }
+                else {
+                    notification.show({
+                        title:"@ViewData["MSG_SAVE_FAILD_T"]",  //title: "错误-ERROR:",
+                        message:"@ViewData["MSG_SAVE_FAILED"]"+":0020"//message: "错误代码-ERROR CODE:0020"
+                    }, "error");
+                }
+                kendo.ui.progress($("#loading"), false);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                notification.show({
+                    title:"@ViewData["MSG_SAVE_FAILD_T"]", //title: "错误-ERROR:",
+                    message:"@ViewData["MSG_SAVE_FAILED"]"+":0021-" + XMLHttpRequest.status //message: "错误代码-ERROR CODE:0021-" + XMLHttpRequest.status
+                }, "error");
+                kendo.ui.progress($("#loading"), false);
+            }
+        });
+    }
+
+    function RefreshGridData(data) {
+        GriddataSource = new kendo.data.DataSource({
+            data: data,
+            batch: true,
+            schema: {
+                model: {
+                    fields: {
+                        SEQNO: { editable: false },
+                        FACTORY_CD: { editable: false },
+                        SHIFT_CODE: { editable: false },
+                        SHIFT_DESC: { editable: false},
+                        SHIFT_SEQ: { editable: true},
+                        SHIFT_FROM: { editable: true, type: "date"  },
+                        SHIFT_TO: { editable: true, type: "date" },
+                        TIME_INTERVAL: { editable: true },
+                        ACTIVE: { editable: true }
+
+                    }
+                }
+            },
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 5
+            },
+            pageSize: 25
+            //serverPaging: true
+        });
+        GriddataSource.fetch();
+
+        var grid = $("#SHIFTLIST").data("kendoGrid");
+        grid.setDataSource(GriddataSource);
+        //grid.dataSource.sync();
+        //或者
+        GriddataSource.read();
+        GriddataSource.refresh;
+    }
+
+    function NotificationInit() {
+        notification = $("#notification").kendoNotification({
+            autoHideAfter: 3000,
+            stacking: "up",
+            templates: [{
+                type: "error",
+                template: $("#errorTemplate").html()
+            }, {
+                type: "upload-success",
+                template: $("#successTemplate").html()
+            }]
+
+        }).data("kendoNotification");
+    }
+
+    function buttoninit() {
+        $("#clearbutton").kendoButton();
+        $("#inquirybutton").kendoButton();
+        NotificationInit();
+        //  ACTIVE_Init();
+        ShiftListGridInit();
+    }
+
+    function ACTIVE_Init() {
+        $("#ACTIVE").kendoDropDownList({
+            dataSource: ["Y", "N"],
+            animation: false,
+            optionLabel: " ",
+            index: 0
+        });
+    }
+
+</script>
+</body>
+
+</html>

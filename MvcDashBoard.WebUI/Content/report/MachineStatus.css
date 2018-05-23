@@ -1,0 +1,223 @@
+﻿.Message{
+          width:12%;
+          float:left;
+          font-size:1em;
+          border:0px solid rgb(128, 128, 128);
+          background-color:#cfcfcf;
+          min-width:10.8em;
+          min-height:500px;
+         }
+
+.MachineList{
+              width:88%;
+              /*min-width:1186px;*/
+              float:left;             
+              /*background-color:ButtonFace;*/
+            }
+
+.Floor {
+              font-family:微软雅黑;
+              color:white;
+              font-size:12px;
+              text-align:center;
+              width:100%;  
+              display:block;   
+              border:0px solid rgb(128, 128, 128);
+              
+                                            
+       }
+.Floor #title {
+              font-family:微软雅黑;
+              color:black;
+              font-size:14px;
+              text-align:center;
+              width:100%;  
+              height:18px;
+              line-height:18px;   
+              border-bottom:0px solid rgb(128, 128, 128); 
+                   
+                                            
+       }
+.Floor .MaichineGroup {        
+              width:100%; 
+              display:table;
+              /*min-width:1186px;*/
+
+              /*padding:2px*/                      
+       }
+
+.MachineTable
+            {      
+              /*//  width:100%;*/
+                background-color:rgb(91, 155, 213); 
+                
+             }
+.MachineTable table{
+                      margin-top: 0;
+                      display: table;
+                      border-collapse:separate;
+                      border-spacing:0px;
+                      -webkit-border-horizontal-spacing: 0px;
+                      -webkit-border-vertical-spacing: 0px;
+                      /*border-color: grey;*/
+                      width:500px;
+
+                   }
+.MachineTable table td {
+                         color: white;
+                         border: 1px solid;
+                         /*width: 10px;*/
+                         text-align: center;
+                         padding:0.8%;
+                       }
+
+/*------------------------------机器信息说明-----------------------------------*/
+
+.MachinDivCol {
+                 width:65px;
+                 float:left;
+                 height:auto;
+                 margin:0px;
+                 min-height:40px;            
+                 min-width:64.8px;   
+}
+.MachinDivClass{
+                 width:100%;   
+                 min-height:40px;            
+                 min-width:64.8px;            
+                 margin:0px 1px 0px 0px;
+                 background-color:transparent;
+                 text-align: center;
+                 /*display:table-cell;*/
+                 border-color:#FFF;
+                 border-width:1px;
+                 border-style:solid; 
+                 cursor:pointer;
+                 /*display:none;*/
+                 /*line-height:29px;*/  
+         
+                }
+
+.Machin_info {
+    width: 100%;
+    margin: 1px;
+    border: 0px;
+    line-height: 100%;
+    -webkit-text-size-adjust: none;
+    font-size: 10px;
+    padding: 0px;
+    margin-top:-14px;
+
+    /*-webkit-transform: scale(0.75);*/
+    /*transform:scale(14);*/
+    /*background-color:black;*/
+    
+}
+.MachinDivClass .machin_status {
+    
+        /*background-image: url('../images/trang.png');*/
+        background-repeat:no-repeat;
+        width: 16px;
+        height:16px;
+        position:relative;
+        top: 0px;
+        left: 0px;
+        border:0px;
+        /*display:none;*/
+    }
+.Machin_info  li{
+                font-size:12px;
+                margin:0px;
+              }
+.Machin_info  li:nth-child(1){
+              font-size:12px;  
+                margin:0px;
+                margin-bottom:2px;
+              }
+
+.opttd {
+border:1px solid #A6193A;
+}
+.area {
+float:left;
+font-family:微软雅黑; 
+color:rgb(128, 128, 128);
+background: -ms-linear-gradient(top, #FFF,  #FFF);        /* IE 10 */
+background:-moz-linear-gradient(top,#FFF,#FFF);/*火狐*/ 
+background:-webkit-gradient(linear, 0% 0%, 0% 100%,from(#FFF), to(#FFF));/*谷歌*/ 
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFF), to(#FFF));      /* Safari 4-5, Chrome 1-9*/
+background: -webkit-linear-gradient(top, #FFF, #FFF);   /*Safari5.1 Chrome 10+*/
+background: -o-linear-gradient(top, #FFF, #FFF);  /*Opera 11.10+*/
+border:2px;
+margin:0px;
+height:15px;
+padding:0px;
+}
+.area li {
+width:100px;
+height:18px;
+border:0px;
+background-color:#F3F3F4;
+}
+.floortitle {
+width:100px;
+height:30px;
+border:0px;
+line-height:36px;
+background-color:#F3F3F4;
+
+}
+
+.area .km-state-active {
+    color: #A6193A;
+    font-weight: bold;
+   background-color:#cecece;
+}
+
+/*------------------------------图例说明-----------------------------------*/
+.ChartsRemark{
+              font-family:微软雅黑;
+              width:50px;
+              height:20px;
+              float:left;
+              margin-top:8px;  
+              margin-left:4px;  
+              display:table;
+              font-size:0.8em;
+              }
+              
+.ChartsRemark div{            
+              float:left;
+              width:20px;
+              height:20px;
+              
+              }
+.ChartsRemark span{
+            
+              margin-left:4px;
+              height:20px;
+              line-height:20px;
+
+              
+              }
+
+
+
+
+/*关机*/
+.machine_status0 { background-color: #000;}
+/*停机*/
+.machine_status1 { background-color:#BC5357}
+/*开机*/
+.machine_status3 { background-color: #68C939}
+
+/*断纱*/
+.machine_status5 { background-image: url('../images/trang_2.png');background-repeat:no-repeat;}
+/*断针*/
+.machine_status7  { background-image: url('../images/trang.png');background-repeat:no-repeat;}
+/*断纱断针*/
+.machine_status9 {background-image: url('../images/trang_3.png');background-repeat:no-repeat;}
+
+
+
+

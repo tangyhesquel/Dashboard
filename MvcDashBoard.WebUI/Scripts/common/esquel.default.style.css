@@ -1,0 +1,84 @@
+/**Body- Delete if needed**/
+
+body{
+	    height: 100%;
+        margin: 0px;
+	font-family:Segoe UI ;
+	font-size:.9em;
+}
+
+/**Esquel Default frame**/
+.esq_container{
+
+/*border:1px solid pink;*/
+	height:77vh;
+	width:98vw;
+	position: relative;
+	
+}
+.esq_navbar{
+	background-image:url(../graphics/top_bg.gif);
+	background-repeat:repeat-x;
+	background-color:#982135;
+	
+	height:110px;
+/*border:1px solid green;*/
+	width:100%;
+	
+}
+.esq_navbar_logo{
+	/*border:1px solid green;*/
+	display: block;
+	height:100px;
+	position: relative;
+	width:180px;
+	
+}
+
+.esq_navbar_appname{
+	
+	/*border:1px solid green;*/
+	display: block;
+	
+	position: relative;
+	height:30px;
+	width:180px;
+	
+}
+
+.esq_left_container{
+	/*border:1px solid green;*/
+	background-color:#dcdcdc;
+	float:left;
+	
+	height:73vh;
+	/*margin-right: -200px;*/
+	position: relative;
+	padding:45px 0 0 0;
+	width:15vw;
+	
+}
+.esq_right_container{
+	/*border: 1px solid blue;*/
+	padding:4px ;
+	float:left;
+	height:77vh;
+	width:82vw;
+	position: relative;
+	
+}
+.esq_footer {
+	
+background-color:#96938e;
+font-size:0.6875em;
+color:#ffffff;
+  /*border: 1px solid pink;*/
+ height:60px;
+ position: relative;
+padding: 20px 0 0 0;
+width:98.50vw;
+height:60px;
+
+	  
+}
+

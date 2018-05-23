@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDashBoard.Common", "MvcDashBoard.Common\MvcDashBoard.Common.csproj", "{22A64A4F-6C21-4728-836B-67591856E07D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDashBoard.DAL", "MvcDashBoard.DAL\MvcDashBoard.DAL.csproj", "{27188C6A-D80C-41EB-BED0-83007839A88A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{019C2EE4-85A5-48AA-BFC0-E702AEDA6B11} = {019C2EE4-85A5-48AA-BFC0-E702AEDA6B11}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDashBoard.Model", "MvcDashBoard.Model\MvcDashBoard.Model.csproj", "{019C2EE4-85A5-48AA-BFC0-E702AEDA6B11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDashBoard.BLL", "MvcDashBoard.BLL\MvcDashBoard.BLL.csproj", "{C24CF573-49C9-4DE8-BC00-2FE7EA7CA17E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{27188C6A-D80C-41EB-BED0-83007839A88A} = {27188C6A-D80C-41EB-BED0-83007839A88A}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDashBoard.WebUI", "MvcDashBoard.WebUI\MvcDashBoard.WebUI.csproj", "{897161CA-6FC5-40F8-99C0-055050BC76E3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C24CF573-49C9-4DE8-BC00-2FE7EA7CA17E} = {C24CF573-49C9-4DE8-BC00-2FE7EA7CA17E}
+		{019C2EE4-85A5-48AA-BFC0-E702AEDA6B11} = {019C2EE4-85A5-48AA-BFC0-E702AEDA6B11}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22A64A4F-6C21-4728-836B-67591856E07D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22A64A4F-6C21-4728-836B-67591856E07D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22A64A4F-6C21-4728-836B-67591856E07D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22A64A4F-6C21-4728-836B-67591856E07D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27188C6A-D80C-41EB-BED0-83007839A88A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27188C6A-D80C-41EB-BED0-83007839A88A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27188C6A-D80C-41EB-BED0-83007839A88A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27188C6A-D80C-41EB-BED0-83007839A88A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{019C2EE4-85A5-48AA-BFC0-E702AEDA6B11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{019C2EE4-85A5-48AA-BFC0-E702AEDA6B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{019C2EE4-85A5-48AA-BFC0-E702AEDA6B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{019C2EE4-85A5-48AA-BFC0-E702AEDA6B11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C24CF573-49C9-4DE8-BC00-2FE7EA7CA17E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C24CF573-49C9-4DE8-BC00-2FE7EA7CA17E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C24CF573-49C9-4DE8-BC00-2FE7EA7CA17E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C24CF573-49C9-4DE8-BC00-2FE7EA7CA17E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{897161CA-6FC5-40F8-99C0-055050BC76E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{897161CA-6FC5-40F8-99C0-055050BC76E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{897161CA-6FC5-40F8-99C0-055050BC76E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{897161CA-6FC5-40F8-99C0-055050BC76E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

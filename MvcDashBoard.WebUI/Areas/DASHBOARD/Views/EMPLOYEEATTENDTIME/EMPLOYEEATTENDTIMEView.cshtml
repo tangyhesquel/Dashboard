@@ -1,0 +1,322 @@
+﻿@using System.Web.Helpers;
+@model MvcDashBoard.Model.DASHBOARD.Models.EMPLOYEE_ATTENDTIME
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="~/Scripts/common/esquel.default.style.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.common-esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.esquel.min.css" rel="stylesheet" />
+    <link href="~/Scripts/common/kendo.esquel.mobile.min.css" rel="stylesheet" />
+
+    <link href="~/Scripts/common/COMMON.css" rel="stylesheet" />
+    <script src="~/Scripts/common/COMMON.js"></script>
+    <script src="~/Scripts/common/EMPLOYEE_ATTENDTIME.js"></script>
+
+    <script src="~/Scripts/KendoUI/js/jquery.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/jszip.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.web.min.js"></script>
+    <script src="~/Scripts/KendoUI/js/kendo.all.min.js"></script>
+
+    <title>UPDATE ATTEND TIME</title>
+</head>
+<body>
+    @*<div date-role="esq_navbar">*@
+    <div>
+        <div>
+            <table align="center" border="0">
+                <tr style="height:40%;font-size:24px">
+                    <th colspan="9" align="center">
+                        <label id="LBL_HEADER">@ViewData["LBL_HEADER"]</label>@*班次信息维护--SHIFT INFORMATION MAINTENTANCE*@
+                        <p></p>
+                    </th>
+                </tr>
+                <tr>
+                    <td><label id="LBL_FACTORY_CD">@ViewData["LBL_FACTORY_CD"]</label><input id="FACTORY_CD" /></td>@*工厂-FACTORY CODE*@
+                    <td><label id="LBL_LINE_CODE">@ViewData["LBL_LINE_CODE"]</label><input id="LINE_CODE" /></td>@*组别-LINE*@
+                    <td><label id="LBL_SHIFT_CODE">@ViewData["LBL_SHIFT_CODE"]</label><input id="SHIFT_CODE" /></td>@*班次-SHIFT*@
+                    <td><label id="LBL_TRX_DATE">@ViewData["LBL_TRX_DATE"]</label><input id="TRX_DATE" value=@Html.Raw(Json.Encode(ViewData["TRX_DATE"])) /></td>
+                    <td></td>
+                    <td><button id="inquirybutton" onclick="InquiryAttendTime()" style="color:blue">@ViewData["BTN_INQUIRY"]</button></td>@*查询-INQUIRY*@
+                    <td><button id="closebutton" onclick="window.opener=null;window.close();" style="color:blue">@ViewData["BTN_CLOSE"]</button></td>@*关闭-CLOSE*@
+                    <td align="center" style="font-size:24px" hidden="hidden">@Html.ActionLink("返回主页面-RETURN", "DASHBOARDSHOWView", "DASHBOARDSHOWDATA", new { }, new { target = "_self" })</td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <table style="width:95%" border="0" align="center">
+                <tr style="width:100%">
+                    <td width="100%">
+                        <span id="SPAN1" style="font-size:24px">@ViewData["SPN_SPAN1"]</span>@*考勤信息-ATTENDANCE INFORMATION*@
+                        <div id="AttendTimeUpdateGrid"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="loading"></div>
+        <span id="notification" style="display:none;"></span>
+        <script id="errorTemplate" type="text/x-kendo-template">
+            <div class="wrong-pass">
+                <h3>#= title #</h3>
+                <p>#= message #</p>
+            </div>
+        </script>
+        <script id="successTemplate" type="text/x-kendo-template">
+            <div class="upload-success">
+                <h3>#= message #</h3>
+            </div>
+        </script>
+
+
+        <script>
+            var notificationInit;
+            var changedrowdata1;
+            var FACTORY_CD_dataSource = @Html.Raw(Json.Encode(ViewData["FACTORY_CD"]));
+            var LINE_CD_dataSource =@Html.Raw(Json.Encode(ViewData["LINE_CD"]));
+            var SHIFT_CODE_dataSource =@Html.Raw(Json.Encode(ViewData["SHIFT_CODE"]));
+
+            $("#FACTORY_CD").kendoComboBox({
+                dataSource: FACTORY_CD_dataSource,
+                dataTextField: "FACTORY_CD",
+                dataValueField: "FACTORY_CD",
+                suggest: true,
+                value:"@Html.DisplayFor(model => model.EMPLOYEE_ATTENDTIME_Query_Criteria.FACTORY_CD)"
+                //enable:false
+                @*value: @Html.Raw(Json.Encode(ViewData["FactoryCd"])),*@
+            });
+
+            $("#LINE_CODE").kendoComboBox({
+                dataSource: LINE_CD_dataSource,
+                dataTextField: "PRODUCTION_LINE_CD",
+                dataValueField: "PRODUCTION_LINE_CD",
+                suggest: true,
+                value: "@Html.DisplayFor(model => model.EMPLOYEE_ATTENDTIME_Query_Criteria.PRODUCTION_LINE_CD)"
+            });
+
+            $("#SHIFT_CODE").kendoComboBox({
+                dataSource: SHIFT_CODE_dataSource,
+                dataTextField: "SHIFT_CODE",
+                dataValueField: "SHIFT_CODE",
+                suggest: true,
+                value: "@Html.DisplayFor(model => model.EMPLOYEE_ATTENDTIME_Query_Criteria.SHIFT)"
+            });
+
+            $("#TRX_DATE").kendoDatePicker({
+                value: "@Html.DisplayFor(model => model.EMPLOYEE_ATTENDTIME_Query_Criteria.TRX_DATE)"
+            });
+
+            $("#inquirybutton").kendoButton();
+            $("#closebutton").kendoButton();
+
+            NotificationInit();
+
+            var AttendTimeUpdateGrid_Datasource = @Html.Raw(Json.Encode(Model.EMPLOYEE_ATTENDTIME_list));
+            GridInit(AttendTimeUpdateGrid_Datasource);
+            RefreshGridData(AttendTimeUpdateGrid_Datasource);
+
+            function GridInit(dataSource) {
+                $("#AttendTimeUpdateGrid").kendoGrid({
+                    pageable: {
+                        messages: {
+                            first: @Html.Raw(Json.Encode(ViewData["GRID_FIRST"])),//"FIRST",
+                            last: @Html.Raw(Json.Encode(ViewData["GRID_LAST"])),//"LAST",
+                            next: @Html.Raw(Json.Encode(ViewData["GRID_NEXT"])),//"NEXT",
+                            previous: @Html.Raw(Json.Encode(ViewData["GRID_PREVIOUS"])),//"PREVIOUS",
+                            display: "{0}-{1} / {2}",
+                            itemsPerPage: @Html.Raw(Json.Encode(ViewData["GRID_ITEMSPERPAGE"])),//"LINE/PAGE",
+                            empty: @Html.Raw(Json.Encode(ViewData["GRID_EMPTY"])),//"EMPTY"
+                        },
+                        pageSizes: [5, 10, 20, "all"]
+                    },
+                    resizable: true,
+                    scrollable: false,
+                    culture: "zh-CN",
+                    excel: {
+                        allPages: true
+                    },
+                    //dataSource:dataSource,
+                    editable: true,
+                    selectable: true,
+                    columns: [
+
+                    {
+                        title: @Html.Raw(Json.Encode(ViewData["GRID_SEQNO"])),//"序号-SEQNO",
+                        field: "SEQNO",
+                        width: 80,
+                        hidden: false
+
+                    },
+                    {
+                        title: @Html.Raw(Json.Encode(ViewData["GRID_FACTORY"])),//"工厂-FACTORY",
+                        field: "FACTORY_CD",
+                        width: 80,
+                        hidden: false
+                    },
+                    {
+                        title: @Html.Raw(Json.Encode(ViewData["GRID_EMPLOYEE"])),//"员工号-EMPLOYEE",
+                        field: "EMPLOYEE_NO",
+                        width: 120,
+                        hidden: false
+                    },
+                    {
+                        title: @Html.Raw(Json.Encode(ViewData["GRID_ATTEND_DATE"])),//"打卡时间-TIME",
+                        field: "ATTEND_DATE",
+                        type: "date",
+                        width: "200",
+                        format: "{0: yyyy-MM-dd HH:mm:ss}"
+                    },
+                    {
+                        title: @Html.Raw(Json.Encode(ViewData["GRID_CREATE_TIME"])),//"取数时间-GETTING DATA TIME",
+                        field: "CREATE_TIME",
+                        type: "date",
+                        width: "200",
+                        format: "{0: yyyy-MM-dd HH:mm:ss}"
+                    },
+                    {
+                        title: @Html.Raw(Json.Encode(ViewData["GRID_SHIFT"])),//"班次-SHIFT",
+                        field: "SHIFT",
+                        width: 80,
+                        hidden: false,
+                        attributes: {
+                            "class": "table-cell",
+                            style: "text-align:center ; font-size: 14px;color:blue"
+                        },
+                        editor: SHIFTEdit
+                    },
+                    {
+                        title: @Html.Raw(Json.Encode(ViewData["GRID_WORK_DATE"])),//"上班日期-WORK DATE",
+                        field: "TRX_DATE",
+                        type: "date",
+                        width: "100",
+                        format: "{0:yyyy-MM-dd}",
+                        attributes: {
+                            "class": "table-cell",
+                            style: "text-align:center ; font-size: 14px;color:blue"
+                        }
+                    },
+                    {
+                        title: @Html.Raw(Json.Encode(ViewData["GRID_LINE"])),//"组别-LINE",
+                        field: "PRODUCTION_LINE_CD",
+                        width: 140,
+                        attributes: {
+                            "class": "table-cell",
+                            style: "text-align:center ; font-size: 14px;color:blue"
+                        },
+                        editor: LINEEdit
+                    },
+                    {
+                        title:@Html.Raw(Json.Encode(ViewData["GRID_OPERATION"])),//"操作",
+                        command: [
+                        {
+                            text: @Html.Raw(Json.Encode(ViewData["GRID_SAVE"])),//"保存-SAVE",
+                            click: function (e) {
+                                var tr = $(e.target).closest("tr"); // get the current table row (tr)
+                                var data = this.dataItem(tr);
+                                var date = new Date(data.TRX_DATE);
+                                var dateresult = getdate(date, 'S', 'YYYY-MM-DD','Y');
+                                EditData(data.SEQNO, data.SHIFT, dateresult, data.PRODUCTION_LINE_CD);
+                            }
+                        }
+                        ],
+                    },
+
+                    ],
+                    edit: function (e) {
+                        changedrowdata1 = null;
+                        var selectedRows1 = this.select();
+                        changedrowdata1 = this.dataItem(selectedRows1[0]);
+                    }
+                });
+            }
+
+            function EditData(SEQNO, SHIFT, TRX_DATE, PRODUCTION_LINE_CD) {
+                kendo.ui.progress($("#loading"), true);
+                $.ajax({
+                    async: false,
+                    dataType: 'json',
+                    type: 'POST',
+                    url: '../../DASHBOARD/EMPLOYEEATTENDTIME/UPDATE_ATTENDTIME',
+                    data: {
+                        SEQNO: SEQNO,
+                        SHIFT: SHIFT,
+                        TRX_DATE: TRX_DATE,
+                        PRODUCTION_LINE_CD: PRODUCTION_LINE_CD
+                    },
+                    success: function (data) {
+                        if (data.SUCCESS == true) {
+                            notification.show({
+                                title:"@ViewData["MSG_SAVE_OK_T"]",
+                                message:"@ViewData["MSG_SAVE_OK"]" //message: "保存成功!\n\r SAVE SUCCESSFULLY!"
+                            }, "upload-success");
+                        }
+                        else {
+                            notification.show({
+                                title:"@ViewData["MSG_SAVE_FAILD_T"]",  //title: "错误-ERROR:",
+                                message:"@ViewData["MSG_SAVE_FAILED"]"+":0020"//message: "错误代码-ERROR CODE:0020"
+                            }, "error");
+                        }
+                        kendo.ui.progress($("#loading"), false);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        notification.show({
+                            title:"@ViewData["MSG_SAVE_FAILD_T"]", //title: "错误-ERROR:",
+                            message:"@ViewData["MSG_SAVE_FAILED"]"+":0021-" + XMLHttpRequest.status //message: "错误代码-ERROR CODE:0021-" + XMLHttpRequest.status
+                        }, "error");
+                        kendo.ui.progress($("#loading"), false);
+                    }
+                });
+            }
+
+            function InquiryAttendTime() {
+                kendo.ui.progress($("#loading"), true);
+                $.ajax({
+                    async: false,
+                    dataType: 'json',
+                    type: 'POST',
+                    url: '../../DASHBOARD/EMPLOYEEATTENDTIME/InquiryAttendTime',
+                    data: {
+                        FACTORY_CD: $('#FACTORY_CD').val(),
+                        SHIFT_CODE: $('#SHIFT_CODE').val(),
+                        TRX_DATE: $('#TRX_DATE').val(),
+                        LINE_CODE: $('#LINE_CODE').val()
+                    },
+                    success: function (data) {
+                        if (data.SUCCESS == true) {
+                            RefreshGridData(data.Data.EMPLOYEE_ATTENDTIME_list);
+                            notification.show({
+                                title:"@ViewData["MSG_INQ_OK_T"]",
+                                message:"@ViewData["MSG_INQ_OK"]" //message: "保存成功!\n\r SAVE SUCCESSFULLY!"
+                            }, "upload-success");
+                        }
+                        else {
+                            notification.show({
+                                title:"@ViewData["MSG_INQ_FAILED_T"]",  //title: "错误-ERROR:",
+                                message:"@ViewData["MSG_INQ_FAILED"]"+":0040"  //message: "错误代码-ERROR CODE:0040"
+                            }, "error");
+                        }
+                        kendo.ui.progress($("#loading"), false);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        notification.show({
+                            title:"@ViewData["MSG_INQ_FAILED_T"]", //title: "错误-ERROR:",
+                            message:"@ViewData["MSG_INQ_FAILED"]"+":0041-" + XMLHttpRequest.status //message: "错误代码-ERROR CODE:0041-" + XMLHttpRequest.status
+                        }, "error");
+                        kendo.ui.progress($("#loading"), false);
+                    }
+                });
+            }
+        </script>
+    </div>
+</body>
+</html>
