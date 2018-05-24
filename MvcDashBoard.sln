@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDashBoard.WebUI", "MvcDa
 		{019C2EE4-85A5-48AA-BFC0-E702AEDA6B11} = {019C2EE4-85A5-48AA-BFC0-E702AEDA6B11}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DashboardSetup", "DashboardSetup", "{3B84E01C-066F-4C00-A2CC-BBD5EFC608D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
