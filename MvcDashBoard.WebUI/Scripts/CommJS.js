@@ -1,6 +1,7 @@
 ﻿var APIUrl = "http://192.168.99.18:8888/api/";
 //var APIUrl = "http://devazure.esquel.cn/KnCCSDashBoard/WebAPI/api/";
 //var APIUrl = "http://localhost:6500/api/";
+
 function showtime(obj,rate) {
     ss=new Date().format("yyyy-MM-dd EEE HH:mm:ss");
     $("#"+obj).html(ss);
