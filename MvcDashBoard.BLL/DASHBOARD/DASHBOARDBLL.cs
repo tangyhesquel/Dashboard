@@ -539,7 +539,7 @@ namespace MvcDashBoard.BLL.DASHBOARD
                 RUNNING_BASIC_INFORMATION_data.USE_LINE_TARGET2=BASICINFORMATION_data.USE_LINE_TARGET2;
                 return RUNNING_BASIC_INFORMATION_data;
             }
-            catch (Exception ex)
+            catch (Exception)
             { 
                 return null; 
             }
@@ -556,7 +556,7 @@ namespace MvcDashBoard.BLL.DASHBOARD
                 DASHBOARD_SHOW_data = DASHBOARDSHOW_DATA(FACTORY_CD, LINE_CODE, SHIFT_CODE, TRX_DATE,1);
                 return DASHBOARD_SHOW_data;
             }
-            catch (Exception ex)
+            catch (Exception)
             { 
                 return null; 
             }
@@ -575,7 +575,7 @@ namespace MvcDashBoard.BLL.DASHBOARD
                 JsonResponse = "{\"SUCCESS\":true, \"Data\": " + JsonConvert.SerializeObject(DASHBOARD_SHOW_data);
                 JsonResponse += "}";
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 JsonResponse = "{\"SUCCESS\":false, \"Data\": " + JsonConvert.SerializeObject(null);
                 JsonResponse += "}";
@@ -670,7 +670,7 @@ namespace MvcDashBoard.BLL.DASHBOARD
                 DASHBOARD_SHOW_data.DEFECT_TOP = DEFECT_TOP;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
             finally { }

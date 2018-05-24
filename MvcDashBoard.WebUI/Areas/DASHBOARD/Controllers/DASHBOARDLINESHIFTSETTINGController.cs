@@ -13,7 +13,7 @@ namespace MvcDashBoard.WebUI.Areas.DASHBOARD.Controllers
         // GET: DASHBOARD/DASHBOARDLINESHIFTSETTING
         public ActionResult Index()
         {
-            return View();
+              return View();
         }
 
         public ActionResult DASHBOARDLINESHIFTSETTINGView()
