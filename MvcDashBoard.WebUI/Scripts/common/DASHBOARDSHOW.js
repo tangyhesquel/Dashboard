@@ -133,7 +133,7 @@ function Table2Data(data1) {
     var currhours = new Date().getHours();
 
     var seq24oclock=0 ;
-    for (var i = 1; i < table2row; i++) {
+    for (var i = 1; i <= table2row; i++) {
         var ss = data1.FN_DASHBOARD_TIME_INTERVAL_QTY_Result[i - 1];
         if (parseInt(ss.TIME_PERIOD.substr(0, 2)) == 0)
         {
@@ -142,7 +142,7 @@ function Table2Data(data1) {
         }
     }
 
-    for (var i = 1; i < table2row; i++) {
+    for (var i = 1; i <= table2row; i++) {
         LBL_TIME = 'LBL_TIME_' + i.toString();
         LBL_QTY = 'LBL_QTY_' + i.toString();
 
