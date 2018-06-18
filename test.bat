@@ -1,1 +1,1 @@
-test
+echo 1
